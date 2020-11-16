@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /search
+Disallow: /cart
+Disallow: /checkout
+
+# Sitemap: http://site.ru/sitemap.xml
+# Host: site.ru
