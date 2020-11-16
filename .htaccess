@@ -1,0 +1,67 @@
+<FilesMatch ".(flv|gif|jpg|jpeg|png|ico|swf|js|css|pdf|svg)$">
+  Header set Cache-Control "max-age=2592000"
+</FilesMatch>
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+    ExpiresByType image/gif "access plus 2 months"
+    ExpiresByType image/jpeg "access plus 2 months"
+    ExpiresByType image/png "access plus 2 months"
+    ExpiresByType image/x-icon "access plus 2 months"
+    ExpiresByType application/x-shockwave-flash "access plus 2 months"
+    ExpiresByType text/css "access plus 2 months"
+    ExpiresByType text/javascript "access plus 2 months"
+    ExpiresByType application/javascript "access plus 2 months"
+    ExpiresByType application/x-javascript "access plus 2 months"
+</IfModule>
+
+<ifModule mod_gzip.c>
+    mod_gzip_on Yes
+    mod_gzip_dechunk Yes
+    mod_gzip_item_include file .(html?|txt|css|js|php|pl)$
+    mod_gzip_item_include handler ^cgi-script$
+    mod_gzip_item_include mime ^text/.*
+    mod_gzip_item_include mime ^application/x-javascript.*
+    mod_gzip_item_exclude mime ^image/.*
+    mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
+</ifModule>
+
+<ifModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/css text/javascript application/javascript application/x-javascript
+</ifModule>
+
+Options All -ExecCGI -Indexes -Includes +FollowSymLinks
+
+DirectoryIndex start.php
+
+ErrorDocument 404 /404.html
+
+RewriteEngine On
+RewriteBase /
+
+# Rredirect www to without www
+# RewriteCond %{HTTP_HOST} ^www.site.ru$ [NC]
+# RewriteRule ^(.*)$ http://site.ru/$1 [R=301,L]
+
+RewriteRule ^cp/logout$ ?cp=admin&do=logout [L]
+RewriteRule ^cp/([^.]+)/([^.]+)/([^.]+)/([0-9]+)$ ?cp=admin&m=$1&do=$2&photo=$3&id=$4 [L]
+RewriteRule ^cp/([^.]+)/page/([0-9]+)$ ?cp=admin&m=$1&page=$2 [L]
+RewriteRule ^cp/([^.]+)/([^.]+)/([0-9]+)$ ?cp=admin&m=$1&do=$2&id=$3 [L]
+RewriteRule ^cp/([^.]+)/([^.]+)$ ?cp=admin&m=$1&do=$2 [L]
+RewriteRule ^cp/([^.]+)$ ?cp=admin&m=$1 [L]
+RewriteRule ^cp$ ?cp=admin [L]
+
+RewriteRule ^sitemap.xml$ ?do=sitemap [L]
+RewriteRule ^cart$ ?do=shop&action=cart [L]
+RewriteRule ^checkout$ ?do=shop&action=checkout [L]
+
+RewriteRule ^([^/]+).html$ ?do=static&page=$1 [L]
+RewriteRule ^([0-9]+)-(.*)$ ?do=shop&productid=$1&seourl=$2 [L]
+RewriteRule ^([^.]+)/page/([0-9]+)$ ?do=shop&category=$1&cstart=$2 [L]
+RewriteRule ^([^.]+)$ ?do=shop&category=$1 [L]
+
+
+
+
+
+
