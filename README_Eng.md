@@ -238,4 +238,4 @@ define ( 'FL', '/subdir' ); // frontend link
 Edit the template links where necessary.
 
 ## For any questions
-Write to e-mail dev@xrich.ru
+Write to e-mail dev@xfor.top
