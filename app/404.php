@@ -56,18 +56,10 @@ $tpl->set('{content}', $tpl->result['404']);
 
 if (isset($_SERVER['HTTP_X_PJAX'])) {
     echo $metatags;
-    if ((int)$config['debug'] === 0) {
-        echo $tpl->result['content'];
-    } else {
-        echo htmlCompress($tpl->result['content']);
-    }
+    echo (int)$config['debug'] === 0 ? Helper::htmlCompress($tpl->result['content']) : $tpl->result['content'];
     die();
 }
 
 $tpl->compile('main');
-if ((int)$config['debug'] === 0) {
-    echo $tpl->result['main'];
-} else {
-    echo htmlCompress($tpl->result['main']);
-}
-die();
+
+echo (int)$config['debug'] === 0 ? Helper::htmlCompress($tpl->result['main']) : $tpl->result['main'];

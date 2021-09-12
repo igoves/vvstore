@@ -40,12 +40,7 @@ if (!isset($_SESSION['password']) || $_SESSION['password'] !== $config['pass']) 
     $tpl->set('{AL}', AL);
     $tpl->set('{FL}', FL);
     $tpl->compile('auth');
-    if ((int)$config['debug'] === 0) {
-        echo Helper::htmlCompress($tpl->result['auth']);
-    } else {
-        echo $tpl->result['auth'];
-    }
-    $tpl->global_clear();
+    echo (int)$config['debug'] === 0 ? Helper::htmlCompress($tpl->result['auth']) : $tpl->result['auth'];
     die();
 }
 
@@ -91,21 +86,10 @@ $tpl->set('[/is_logged]', '');
 $tpl->set('{content}', $tpl->result['content']);
 
 if (isset($_SERVER['HTTP_X_PJAX'])) {
-    if ((int)$config['debug'] === 0) {
-        echo Helper::htmlCompress($tpl->result['content']);
-    } else {
-        echo $tpl->result['content'];
-    }
+    echo (int)$config['debug'] === 0 ? Helper::htmlCompress($tpl->result['content']) : $tpl->result['content'];
     die();
 }
 
 $tpl->compile('main');
-if ((int)$config['debug'] === 0) {
-    echo Helper::htmlCompress($tpl->result['main']);
-} else {
-    echo $tpl->result['main'];
-}
 
-$tpl->global_clear();
-$db->close();
-die();
+echo (int)$config['debug'] === 0 ? Helper::htmlCompress($tpl->result['main']) : $tpl->result['main'];
