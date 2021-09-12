@@ -8,8 +8,13 @@ if (!defined('XFOR')) {
     die('Hacking attempt!');
 }
 
+$do = !isset($do) && isset($_GET['do']) ? Helper::totranslit($db->safesql($_GET['do'])) : '';
+$mod = isset($_GET['m']) ? $db->safesql($_GET['m']) : 'console';
+
+$lang = $lang['back'];
+
 $tpl = new template();
-$tpl->dir = ROOT_DIR . '/theme/backend/';
+$tpl->dir = ADMIN_THEME;
 define('TEMPLATE_DIR', $tpl->dir);
 $tpl->clear();
 

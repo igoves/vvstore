@@ -11,17 +11,24 @@ ob_implicit_flush(0);
 const PREFIX = '2v';
 const XFOR = true;
 const ROOT_DIR = __DIR__;
-const DB_DIR = ROOT_DIR . '/database';
-const CLASSES_DIR = ROOT_DIR . '/classes';
-const APP_DIR = ROOT_DIR . '/app';
-const FRONT_DIR = APP_DIR . '/frontend';
-const ADMIN_DIR = APP_DIR . '/backend';
+const DB_DIR = ROOT_DIR . '/database/';
+const LANG_DIR = ROOT_DIR . '/languages/';
+const CLASSES_DIR = ROOT_DIR . '/classes/';
+const APP_DIR = ROOT_DIR . '/app/';
+const FRONT_DIR = APP_DIR . '/frontend/';
+const FRONT_THEME = ROOT_DIR . '/theme/default/';
+const ADMIN_DIR = APP_DIR . '/backend/';
+const ADMIN_THEME = ROOT_DIR . '/theme/backend/';
 const AL = 'cp';     // admin link
 const FL = '';       // frontend link
 
-$config = [];
-require_once CLASSES_DIR . '/db.class.php';
+require_once CLASSES_DIR . 'db.class.php';
+$db = new Database();
+if (!$db) {
+    die($db->lastErrorMsg());
+}
 $sql = $db->query("SELECT * FROM '" . PREFIX . "_settings'");
+$config = [];
 while ($row = $db->get_row($sql)) {
     $config[$row['alt']] = $row['value'];
 }
@@ -38,4 +45,18 @@ if ((int)$config['debug'] === 0) {
     @ini_set('html_errors', true);
 }
 
-require_once APP_DIR . '/init.php';
+date_default_timezone_set($config['timezone']);
+
+require_once CLASSES_DIR . 'templates.class.php';
+require_once CLASSES_DIR . 'helper.class.php';
+//require_once APP_DIR . '/helper.php';
+require_once LANG_DIR . $config['lang'] . '.php';
+
+Helper::checkDoubleSlash();
+
+if (isset($_GET['cp']) && $_GET['cp'] === 'admin') {
+    require_once ADMIN_DIR . 'core.php';
+} else {
+    require_once FRONT_DIR . 'core.php';
+}
+die();

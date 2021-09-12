@@ -8,78 +8,92 @@ if (!defined('XFOR')) {
     die('Hacking attempt!');
 }
 
-$shop_cat = [];
-$sql = $db->query("SELECT * FROM '" . PREFIX . "_categories' ORDER BY posi");
-while ($row = $db->get_row($sql)) {
-    $shop_cat[$row['id']] = array();
-    foreach ($row as $key => $value) {
-        $shop_cat[$row['id']][$key] = stripslashes($value);
-        $cat[$row['id']]['name'] = $row['name'];
-        $cat[$row['id']]['desc'] = $row['desc'];
-        $cat[$row['id']]['parent'] = (int)$row['parent'];
-        $cat[$row['id']]['desc'] = $row['desc'];
-        $cat_alt[$row['id']] = $row['alt'];
+$do = !isset($do) && isset($_GET['do']) ? Helper::totranslit($db->safesql($_GET['do'])) : '';
+
+$lang = $lang['front'];
+
+$tpl = new template();
+$tpl->dir = FRONT_THEME;
+define('TEMPLATE_DIR', $tpl->dir);
+$tpl->clear();
+
+$metatags = [
+    'title' => $config['home_title'],
+    'description' => $config['description'],
+    'keywords' => $config['keywords'],
+    'header_title' => ''
+];
+
+switch ($do) {
+    case 'static' :
+        include FRONT_DIR . 'static.php';
+        break;
+    case 'sitemap' :
+        include_once CLASSES_DIR . 'sitemap.class.php';
+        $map = new sitemap($config);
+        echo $map->build_map();
+        die();
+    case 'shop' :
+        include FRONT_DIR . 'shop.php';
+        break;
+    case 'search' :
+        include FRONT_DIR . 'search.php';
+        break;
+    default :
+        include FRONT_DIR . 'start.php';
+        break;
+}
+
+$page_extra = '';
+if (isset($cstart) && $cstart > 1) {
+    $page_extra = ' &raquo; ' . $lang['page'] . ' ' . (int)$_GET['cstart'];
+}
+if ($metatags['header_title']) {
+    $metatags['title'] = stripslashes($metatags['header_title'] . $page_extra);
+}
+
+$metatags = <<<HTML
+<title>{$metatags['title']}</title>
+<meta name="description" content="{$metatags['description']}"/>
+<meta name="keywords" content="{$metatags['keywords']}"/>
+HTML;
+//
+
+$total_qty = 0;
+$total_cost = 0;
+if (!empty($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $key => $value) {
+        $total_cost += $value['cost'] * $value['qty'];
+        $total_qty += $value['qty'];
     }
 }
 
-
-if (isset ($_GET['category'])) {
-    $category = explode('/', $_GET['category']);
-    $url[1] = end($category);
-    $_cat_id = Helper::getId($shop_cat, end($category));
-    if (empty($_cat_id)) {
-        include APP_DIR . '/404.php';
-    }
-    $parent_id = $shop_cat[$_cat_id]['parent'];
-    $cnt = 1;
-    while ($parent_id) {
-        $url[] = $shop_cat[$parent_id]['alt'];
-        $parent_id = $shop_cat[$parent_id]['parent'];
-        $cnt++;
-    }
-    if (count($category) !== $cnt) {
-        include APP_DIR . '/404.php';
-    }
-    $count = $cnt;
-    foreach ($category as $key => $value) {
-        if (!in_array($value, $cat_alt) || $value != $url[$count]) {
-            include APP_DIR . '/404.php';
-        }
-        $count--;
-    }
-    $category = end($category);
-    $category = $db->safesql(strip_tags($category));
-    $category_id = !empty($category) ? Helper::getId($shop_cat, $category) : false;
-} else {
-    $category = '';
-}
-
-$productid = isset($_GET['productid']) ? (int)$_GET['productid'] : 0;
-$cstart = isset($_GET['cstart']) ? (int)$_GET['cstart'] : 0;
-
-if ($cstart < 0) {
-    $cstart = 0;
-}
-
-if (isset($_GET['action']) && $_GET['action'] === 'cart') {
-    include FRONT_DIR . '/cart.php';
-}
-
-if (isset($_GET['action']) && $_GET['action'] === 'checkout') {
-    include FRONT_DIR . '/checkout.php';
-} else {
-    if ($productid) {
-        include FRONT_DIR . '/product.full.php';
-    } else {
-        if (isset($_GET['category'])) {
-            $get_cats = Helper::getSubCats($category_id);
-            $get_cats = str_replace('|', ',', $get_cats);
-            foreach ($shop_cat as $cats) {
-                if ($cats['parent'] === $category_id) {
-                    $get_sub_cats[] = $cats['id'];
-                }
-            }
-        }
-        include FRONT_DIR . '/product.list.php';
+$tpl->load_template('main.tpl');
+$tpl->set('{total_qty}', $total_qty);
+$tpl->set('{total_cost}', $total_cost);
+$tpl->set('{Y}', date('Y'));
+$tpl->set('{address}', $config['address']);
+$tpl->set('{val}', $config['val']);
+$tpl->set('{domen}', $config['domen']);
+$tpl->set('{FL}', FL);
+if (!empty($config['tel'])) {
+    $tel_array = explode(',', $config['tel']);
+    $i = 0;
+    foreach ($tel_array as $key => $value) {
+        $i++;
+        $tpl->set('{tel_' . $i . '}', trim($value));
     }
 }
+$tpl->set('{headers}', $metatags);
+$tpl->set('{content}', $tpl->result['content']);
+
+if (isset($_SERVER['HTTP_X_PJAX'])) {
+    echo $metatags;
+    echo (int)$config['debug'] === 0 ? Helper::htmlCompress($tpl->result['content']) : $tpl->result['content'];
+    die();
+}
+
+$tpl->compile('main');
+
+echo (int)$config['debug'] === 0 ? Helper::htmlCompress($tpl->result['main']) : $tpl->result['main'];
+

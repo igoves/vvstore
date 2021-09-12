@@ -322,4 +322,16 @@ class Helper
         return $html;
     }
 
+    public static function checkDoubleSlash ()
+    {
+        $URI = strtolower($_SERVER['REQUEST_URI']);
+        if (false !== strpos($_SERVER['REQUEST_URI'], '//')) {
+            $URI = str_replace('//', '/', $_SERVER['REQUEST_URI']);
+            $protocol = Helper::getProtocol();
+            header('HTTP/1.1 301 Moved Permanently');
+            header('Location: ' . $protocol . $config['domen'] . $URI);
+            die();
+        }
+    }
+
 }
