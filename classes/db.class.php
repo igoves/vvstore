@@ -12,7 +12,7 @@ class Database extends SQLite3
 {
     public function __construct()
     {
-        $this->open(DB_DIR . '/db_ru.sqlite');
+        $this->open(DB_DIR . '/db_en.sqlite');
     }
 
     public function safesql($source)

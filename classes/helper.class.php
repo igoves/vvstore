@@ -285,4 +285,41 @@ class Helper
         return $text;
     }
 
+    public static function array2ul($al, $array, $dropdown = 0, $out = '')
+    {
+        foreach ($array as $alt => $name) {
+            $alt_url = str_replace('/', '', $alt);
+            if (isset($_GET['m']) && !empty($_GET['m'])) {
+                if ($_GET['m'] == $alt_url) {
+                    $active = "class='active'";
+                } else {
+                    $active = "";
+                }
+            } else {
+                $active = '';
+            }
+            if ($alt == '' && !isset($_GET['m'])) {
+                $active = "class='active'";
+            }
+            $out .= "<li {$active}><a href='/{$al}{$alt}'>{$name}</a></li>";
+        }
+        return $out;
+    }
+
+    public static function htmlCompress($html)
+    {
+        preg_match_all('!(<(?:code|pre).*>[^<]+</(?:code|pre)>)!', $html, $pre);
+        $html = preg_replace('!<(?:code|pre).*>[^<]+</(?:code|pre)>!', '#pre#', $html);
+        $html = preg_replace('#<!–[^\[].+–>#', '', $html);
+        $html = preg_replace('/[\r\n\t]+/', ' ', $html);
+        $html = preg_replace('/>[\s]+</', '><', $html);
+        $html = preg_replace('/[\s]+/', ' ', $html);
+        if (!empty($pre[0])) {
+            foreach ($pre[0] as $tag) {
+                $html = preg_replace('!#pre#!', $tag, $html, 1);
+            }
+        }
+        return $html;
+    }
+
 }

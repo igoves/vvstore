@@ -42,7 +42,7 @@ function DisplayCategories($parentid = 0, $sublevelmarker = '')
 
                 if ($shop_cat[$id]['status'] == '1') {
 
-                    $full_link = "<a rel='noajax' class='btn btn-sm btn-default' href='" . FL . "/" . get_url($shop_cat[$id]['id']) . "' target='_blank' title='" . $lang['link'] . "'><span class='glyphicon glyphicon-share-alt'></span></a>";
+                    $full_link = "<a rel='noajax' class='btn btn-sm btn-default' href='" . FL . "/" . Helper::getUrl($shop_cat[$id]['id']) . "' target='_blank' title='" . $lang['link'] . "'><span class='glyphicon glyphicon-share-alt'></span></a>";
 
                 } else {
 

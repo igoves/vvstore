@@ -36,7 +36,7 @@ if (!isset($_SESSION['password']) || $_SESSION['password'] !== $config['pass']) 
     $tpl->set('{FL}', FL);
     $tpl->compile('auth');
     if ((int)$config['debug'] === 0) {
-        echo htmlCompress($tpl->result['auth']);
+        echo Helper::htmlCompress($tpl->result['auth']);
     } else {
         echo $tpl->result['auth'];
     }
@@ -70,7 +70,7 @@ if (!empty($do)) {
 require_once $url;
 
 $tpl->load_template('main.tpl');
-$tpl->set('{top_menu}', array2ul(AL, [
+$tpl->set('{top_menu}', Helper::array2ul(AL, [
     '' => '<span class="glyphicon glyphicon-home"></span>',
     '/products' => $lang['goods'],
     '/categories' => $lang['categories'],
@@ -87,7 +87,7 @@ $tpl->set('{content}', $tpl->result['content']);
 
 if (isset($_SERVER['HTTP_X_PJAX'])) {
     if ((int)$config['debug'] === 0) {
-        echo htmlCompress($tpl->result['content']);
+        echo Helper::htmlCompress($tpl->result['content']);
     } else {
         echo $tpl->result['content'];
     }
@@ -96,7 +96,7 @@ if (isset($_SERVER['HTTP_X_PJAX'])) {
 
 $tpl->compile('main');
 if ((int)$config['debug'] === 0) {
-    echo htmlCompress($tpl->result['main']);
+    echo Helper::htmlCompress($tpl->result['main']);
 } else {
     echo $tpl->result['main'];
 }
