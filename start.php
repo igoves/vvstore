@@ -17,10 +17,14 @@ const CLASSES_DIR = ROOT_DIR . '/classes/';
 const APP_DIR = ROOT_DIR . '/app/';
 const FRONT_DIR = APP_DIR . '/frontend/';
 const FRONT_THEME = ROOT_DIR . '/theme/default/';
-const ADMIN_DIR = APP_DIR . '/backend/';
+const BACKEND_DIR = APP_DIR . '/backend/';
 const ADMIN_THEME = ROOT_DIR . '/theme/backend/';
 const AL = 'cp';     // admin link
 const FL = '';       // frontend link
+
+if (phpversion() < '7') {
+    die('For the script to work, version php 7 and later is required.');
+}
 
 require_once CLASSES_DIR . 'db.class.php';
 $db = new Database();
@@ -53,10 +57,8 @@ require_once CLASSES_DIR . 'helper.class.php';
 require_once LANG_DIR . $config['lang'] . '.php';
 
 Helper::checkDoubleSlash();
+Helper::checkXss();
 
-if (isset($_GET['cp']) && $_GET['cp'] === 'admin') {
-    require_once ADMIN_DIR . 'core.php';
-} else {
-    require_once FRONT_DIR . 'core.php';
-}
-die();
+$cdir = isset($_GET['cp']) && $_GET['cp'] === 'admin' ? BACKEND_DIR : FRONT_DIR ;
+
+require_once $cdir . 'core.php';

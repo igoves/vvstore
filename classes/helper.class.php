@@ -334,4 +334,22 @@ class Helper
         }
     }
 
+    public static function checkXss()
+    {
+        $url = html_entity_decode(urldecode($_SERVER['QUERY_STRING']), ENT_QUOTES, 'ISO-8859-1');
+        $url = str_replace("\\", '/', $url);
+        if ($url) {
+            if ((strpos($url, '<') !== false) || (strpos($url, '>') !== false) || (strpos($url, '"') !== false) || (strpos($url, './') !== false) || (strpos($url, '../') !== false) || (strpos($url, '\'') !== false) || (strpos($url, '.php') !== false)) {
+                if ($_GET['do'] !== 'search' || $_GET['subaction'] !== 'search') die('Error!');
+            }
+        }
+        $url = html_entity_decode(urldecode($_SERVER['REQUEST_URI']), ENT_QUOTES, 'ISO-8859-1');
+        $url = str_replace("\\", '/', $url);
+        if ($url) {
+            if ((strpos($url, '<') !== false) || (strpos($url, '>') !== false) || (strpos($url, '"') !== false) || (strpos($url, '\'') !== false)) {
+                if ($_GET['do'] !== 'search' || $_GET['subaction'] !== 'search') die('Error!');
+            }
+        }
+    }
+
 }
