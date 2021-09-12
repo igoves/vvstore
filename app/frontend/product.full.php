@@ -31,7 +31,7 @@ if ($row['cat_id'] == 0) {
     $row['cat_id'] = (int)$row['cat_id'];
     $my_cat_link = array();
     $cat_list = explode(',', $row['cat_id']);
-    $my_cat_link = get_categories($cat_list[0]);
+    $my_cat_link = Helper::getCategories($cat_list[0]);
 }
 $tpl->set('{link-category}', $my_cat_link);
 

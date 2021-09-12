@@ -26,7 +26,7 @@ while ($row = $db->get_row($sql)) {
 if (isset ($_GET['category'])) {
     $category = explode('/', $_GET['category']);
     $url[1] = end($category);
-    $_cat_id = get_ID($shop_cat, end($category));
+    $_cat_id = Helper::getId($shop_cat, end($category));
     if (empty($_cat_id)) {
         include APP_DIR . '/404.php';
     }
@@ -49,7 +49,7 @@ if (isset ($_GET['category'])) {
     }
     $category = end($category);
     $category = $db->safesql(strip_tags($category));
-    $category_id = !empty($category) ? get_ID($shop_cat, $category) : false;
+    $category_id = !empty($category) ? Helper::getId($shop_cat, $category) : false;
 } else {
     $category = '';
 }
@@ -60,8 +60,6 @@ $cstart = isset($_GET['cstart']) ? (int)$_GET['cstart'] : 0;
 if ($cstart < 0) {
     $cstart = 0;
 }
-
-include FRONT_DIR . '/product.func.php';
 
 if (isset($_GET['action']) && $_GET['action'] === 'cart') {
     include FRONT_DIR . '/cart.php';
@@ -74,7 +72,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'checkout') {
         include FRONT_DIR . '/product.full.php';
     } else {
         if (isset($_GET['category'])) {
-            $get_cats = get_sub_cats($category_id);
+            $get_cats = Helper::getSubCats($category_id);
             $get_cats = str_replace('|', ',', $get_cats);
             foreach ($shop_cat as $cats) {
                 if ($cats['parent'] === $category_id) {

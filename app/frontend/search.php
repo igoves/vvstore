@@ -8,51 +8,7 @@ if (!defined('XFOR')) {
     die('Hacking attempt!');
 }
 
-include FRONT_DIR . '/product.func.php';
-
-function strip_data($text)
-{
-    $quotes = array(
-        "\x27",
-        "\x22",
-        "\x60",
-        "\t",
-        "\n",
-        "\r",
-        "'",
-        ",",
-        "/",
-        ";",
-        ":",
-        "@",
-        "[",
-        "]",
-        "{",
-        "}",
-        "=",
-        ")",
-        "(",
-        "*",
-        "&",
-        "^",
-        "%",
-        "$",
-        "<",
-        ">",
-        "?",
-        "!",
-        '"'
-    );
-    $goodquotes = array('-', '+', '#');
-    $repquotes = array("\-", "\+", "\#");
-    $text = stripslashes($text);
-    $text = trim(strip_tags($text));
-    $text = str_replace($quotes, '', $text);
-    $text = str_replace($goodquotes, $repquotes, $text);
-    return $text;
-}
-
-$story = strip_data($_GET['story']);
+$story = Helper::stripData($_GET['story']);
 $navi = '';
 $cstart = isset($_GET['cstart']) ? (int)$_GET['cstart'] : 0;
 if ($cstart < 0) {
@@ -111,7 +67,7 @@ if (empty($story) || mb_strlen($story, 'UTF-8') < 3) {
         } else {
             $tpl->load_template('shop/product.short.tile.tpl');
         }
-        $data = getProductShort($config, $db, $tpl, $sql_result);
+        $data = Helper::getProductShort($config, $db, $tpl, $sql_result);
         $content = $data['goods'];
         $i = $data['i'];
 

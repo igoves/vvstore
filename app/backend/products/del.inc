@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 $id = (int)$_GET['id'];
 
@@ -13,7 +15,8 @@ $row = $db->super_query("
 ");
 
 if (!$row['id']) {
-    msg('info', $lang['message'], $lang['good_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '/products">' . $lang['go_to_list'] . '</a>');
+    msg('info', $lang['message'],
+        $lang['good_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '/products">' . $lang['go_to_list'] . '</a>');
 }
 
 $row1 = $db->super_query("
@@ -32,5 +35,6 @@ if ($row1) {
 $db->query("DELETE FROM '" . PREFIX . "_products_images' WHERE product_id = $id");
 $db->query("DELETE FROM '" . PREFIX . "_products' WHERE id = $id");
 
-msg('info', $lang['message'], $lang['success_deleted'] . ' <a class="btn btn-default" href="/' . AL . '/products">' . $lang['go_to_list'] . '</a>');
+msg('info', $lang['message'],
+    $lang['success_deleted'] . ' <a class="btn btn-default" href="/' . AL . '/products">' . $lang['go_to_list'] . '</a>');
 

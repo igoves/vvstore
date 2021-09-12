@@ -24,7 +24,7 @@ $sql = $db->query("
 
 $item = '';
 while ($row = $db->get_row($sql)) {
-    $item .= '<a class="btn btn-default" href="' . FL . '/' . get_url($row['id']) . '" title="' . $row['name'] . '">' . $row['name'] . '</a> ';
+    $item .= '<a class="btn btn-default" href="' . FL . '/' . Helper::getUrl($row['id']) . '" title="' . $row['name'] . '">' . $row['name'] . '</a> ';
 }
 
 if (!empty($item)) {

@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 $total_pages = $db->super_query("SELECT COUNT(*) as num FROM '" . PREFIX . "_products' WHERE id=id");
 

@@ -4,9 +4,11 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
-class db extends SQLite3
+class Database extends SQLite3
 {
     public function __construct()
     {
@@ -31,7 +33,7 @@ class db extends SQLite3
     public function num_rows($sql)
     {
         $i = 0;
-        while ($res = $sql->fetchArray()) {
+        while ($sql->fetchArray()) {
             $i++;
         }
         return $i;
@@ -43,6 +45,8 @@ class db extends SQLite3
     }
 }
 
-$db = new db();
+$db = new Database();
 
-if (!$db) die($db->lastErrorMsg());
+if (!$db) {
+    die($db->lastErrorMsg());
+}

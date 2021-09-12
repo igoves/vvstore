@@ -4,8 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
-
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 if (isset($_POST['add'])) {
 
@@ -37,7 +38,9 @@ if (isset($_POST['add'])) {
 
     $row = $db->super_query("SELECT * FROM '" . PREFIX . "_pages' WHERE alt = '{$alt_name}'");
 
-    if (!$row) $a = 1;
+    if (!$row) {
+        $a = 1;
+    }
 
     if ($a == 1) {
 
@@ -71,7 +74,8 @@ if (isset($_POST['add'])) {
 
 
     } else {
-        msg('info', $lang['message'], $lagn['msg_e1'] . ' <a class="btn btn-default" href="/' . AL . '/pages">' . $lang['go_to_list'] . '</a>');
+        msg('info', $lang['message'],
+            $lagn['msg_e1'] . ' <a class="btn btn-default" href="/' . AL . '/pages">' . $lang['go_to_list'] . '</a>');
     }
 
 }

@@ -11,7 +11,7 @@ if (!defined('XFOR')) {
 $URI = strtolower($_SERVER['REQUEST_URI']);
 if (false !== strpos($_SERVER['REQUEST_URI'], '//')) {
     $URI = str_replace('//', '/', $_SERVER['REQUEST_URI']);
-    $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+    $protocol = Helper::getProtocol();
     header('HTTP/1.1 301 Moved Permanently');
     header('Location: ' . $protocol . $config['domen'] . $URI);
     die();
@@ -21,11 +21,12 @@ $dateNow = date('Y-m-d H:i:s');
 date_default_timezone_set($config['timezone']);
 
 require_once CLASSES_DIR . '/templates.class.php';
-require_once APP_DIR . '/helper.php';
+require_once CLASSES_DIR . '/helper.class.php';
+//require_once APP_DIR . '/helper.php';
 require_once ROOT_DIR . '/lang/' . $config['lang'] . '.php';
 
 
-$do = !isset($do) && isset($_GET['do']) ? totranslit($db->safesql($_GET['do'])) : '';
+$do = !isset($do) && isset($_GET['do']) ? Helper::totranslit($db->safesql($_GET['do'])) : '';
 $mod = isset($_GET['m']) ? $db->safesql($_GET['m']) : 'console';
 
 if (isset($_GET['cp']) && $_GET['cp'] === 'admin') {

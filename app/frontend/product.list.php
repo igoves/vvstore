@@ -22,7 +22,7 @@ if (!isset($category_id)) {
     include APP_DIR . '/404.php';
 }
 
-$url_page = '/' . get_url($category_id);
+$url_page = '/' . Helper::getUrl($category_id);
 
 $cat_title = $cat[$category_id]['name'];
 $cat_desc = '';
@@ -54,7 +54,7 @@ if ($count_all != 0 && !isset($not_found_filter)) {
         LIMIT $cstart, $limit
     ";
     $sql_result = $db->query($sql_select);
-    $data = getProductShort($config, $db, $tpl, $sql_result, $i);
+    $data = Helper::getProductShort($config, $db, $tpl, $sql_result, $i);
     $tpl->result['goods'] = $data['goods'];
     $i = $data['i'];
 } else {

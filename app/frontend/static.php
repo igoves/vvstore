@@ -8,7 +8,7 @@ if (!defined('XFOR')) {
     die('Hacking attempt!');
 }
 
-$name = $db->safesql(trim(totranslit($_GET['page'], true, false)));
+$name = $db->safesql(trim(Helper::totranslit($_GET['page'], true, false)));
 
 $row = $db->super_query("SELECT * FROM '" . PREFIX . "_pages' WHERE alt='$name'");
 

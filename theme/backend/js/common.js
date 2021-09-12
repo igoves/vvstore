@@ -41,7 +41,6 @@ var init_ajax = function () {
 
     $(".pagination").rPage();
 
-    // if ( $('.ajaxform').length ) {
     $('.ajaxform').ajaxForm({
         target: '#mc',
         url: window.location.href,
@@ -49,7 +48,6 @@ var init_ajax = function () {
             $('.ajaxform button[type=submit]').button('loading');
         }
     });
-    // }
 
     $("#show-url").click(function () {
         $("#url").toggle('fast');
@@ -115,7 +113,7 @@ var init_ajax = function () {
     });
 
     if ($('#myChart').length) {
-        myChart = new Chart(document.getElementById("myChart").getContext('2d'), {
+        new Chart(document.getElementById("myChart").getContext('2d'), {
             type: 'bar',
             data: {
                 labels: months_list,
@@ -144,24 +142,17 @@ var _delete = function (action, item) {
     var product_id = $('input[name=product_id]').length ? $('input[name=product_id]').val() : 0;
     var data = 'images=' + action + '_delete&productid=' + product_id;
     if (typeof item !== 'undefined') data += '&item=' + item;
-    // console.log(data);
     $.ajax({
         type: 'post',
         url: '/' + AL + '/products/' + action + '_delete',
         data: data,
         cache: false,
         success: function (responseText) {
-            console.log(responseText);
             var obj = '';
             if (responseText.length) {
                 obj = $.parseJSON(responseText);
             }
-            // if ( action == 'preview' && obj.status == 1 ) {
-            //     $('#'+action+'_result').empty();
-            // }
-            // if ( action == 'images' ) {
             _showimages(obj, action);
-            // }
         }
     });
 };
@@ -174,7 +165,6 @@ var _upload = function (action) {
         elem = $("input[name^='images']");
     }
     var bar = $('.' + action + '-bar');
-    // console.log(product_id);
     $('.ajaxform').ajaxSubmit({
         url: '/' + AL + '/products/' + action + '_upload',
         data: {images: action + '_upload', productid: product_id},
@@ -205,11 +195,9 @@ var _upload = function (action) {
 };
 
 var _showimages = function (items, action) {
-    // console.log(items);
     $('#' + action + '_result').empty();
     if (items.length !== 0) {
-        for (i = 0; i < items.length; i++) {
-            // var folder_prefix = items[i].prefix;
+        for ( var i = 0; i < items.length; i++) {
             var image = items[i].img;
             /*jshint multistr: true */
             $('\

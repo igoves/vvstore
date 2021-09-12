@@ -105,7 +105,6 @@ $id = (int)$_GET['id'];
 
 $row = $db->super_query("SELECT * FROM '" . PREFIX . "_categories' WHERE id = '$id'");
 
-
 if (!$row['id']) {
     msg('info', $lang['message'],
         $lang['no_such_cat'] . ' <a class="btn btn-default" href="/' . AL . '/categories">' . $lang['go_to_list'] . '</a>');

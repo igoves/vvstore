@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 if (isset($_POST['edit'])) {
 
@@ -34,7 +36,8 @@ if (isset($_POST['edit'])) {
     if ($row1['alt']) {
         $real_alt = $row1['alt'];
     } else {
-        msg("info", $lang['message'], $lang['page_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '/pages">' . $lang['go_to_list'] . '</a>');
+        msg("info", $lang['message'],
+            $lang['page_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '/pages">' . $lang['go_to_list'] . '</a>');
     }
 
     $a = 0;
@@ -88,7 +91,8 @@ if (isset($_POST['edit'])) {
         ');
 
     } else {
-        msg('info', $lang['message'], $lang['page_exist'] . ' <a class="btn btn-default" href="/' . AL . '/pages">' . $lang['go_to_list'] . '</a>');
+        msg('info', $lang['message'],
+            $lang['page_exist'] . ' <a class="btn btn-default" href="/' . AL . '/pages">' . $lang['go_to_list'] . '</a>');
     }
 
 }
@@ -97,7 +101,8 @@ if (isset($_POST['edit'])) {
 $id = (int)$_GET['id'];
 $row = $db->super_query("SELECT * FROM '" . PREFIX . "_pages' WHERE id = $id");
 if (!$row['id']) {
-    msg('info', $lang['message'], $lang['page_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '/pages">' . $lang['go_to_list'] . '</a>');
+    msg('info', $lang['message'],
+        $lang['page_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '/pages">' . $lang['go_to_list'] . '</a>');
 }
 $tpl->load_template('pages/edit.tpl');
 $tpl->set_block("'\\[act_add\\](.*?)\\[/act_add\\]'si", "");

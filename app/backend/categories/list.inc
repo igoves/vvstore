@@ -4,13 +4,14 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
-
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 $list = '';
 function DisplayCategories($parentid = 0, $sublevelmarker = '')
 {
-    global $shop_cat, $tpl, $list, $lang;
+    global $shop_cat, $list, $lang;
     if ($parentid == 0) {
         $class = 'warning';
     } else {
@@ -20,7 +21,9 @@ function DisplayCategories($parentid = 0, $sublevelmarker = '')
     if (count($shop_cat)) {
         $root_category = array();
         foreach ($shop_cat as $cats) {
-            if ($cats['parent'] == $parentid) $root_category[] = $cats['id'];
+            if ($cats['parent'] == $parentid) {
+                $root_category[] = $cats['id'];
+            }
         }
         if (count($root_category)) {
             foreach ($root_category as $id) {
@@ -76,7 +79,8 @@ if (isset($_POST['update_position'])) {
         ");
     }
 
-    msg('info', $lang['message'], $lang['pos_updated'] . ' <a class="btn btn-default" href="/' . AL . '/categories">' . $lang['go_to_list'] . '</a>');
+    msg('info', $lang['message'],
+        $lang['pos_updated'] . ' <a class="btn btn-default" href="/' . AL . '/categories">' . $lang['go_to_list'] . '</a>');
 
 }
 

@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 class sitemap
 {
@@ -124,8 +126,12 @@ class sitemap
 
     private function get_url($id, $cat_info)
     {
-        if (!$id) return;
-        if (isset($cat_info[$id]['parent'])) $parent_id = $cat_info[$id]['parent'];
+        if (!$id) {
+            return '';
+        }
+        if (isset($cat_info[$id]['parent'])) {
+            $parent_id = $cat_info[$id]['parent'];
+        }
         $url = $cat_info[$id]['alt'];
         if (isset($parent_id)) {
             while ($parent_id) {

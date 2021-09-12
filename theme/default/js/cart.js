@@ -1,6 +1,6 @@
-var cart = (function() {
+var cart = (function () {
 
-    var spin = function() {
+    var spin = function () {
         $(".spin").TouchSpin({
             min: 1,
             max: 999,
@@ -8,22 +8,22 @@ var cart = (function() {
             verticalupclass: 'glyphicon glyphicon-plus',
             verticaldownclass: 'glyphicon glyphicon-minus'
         });
-        $( ".spin" ).change(function() {
+        $(".spin").change(function () {
             cart.upd();
         });
     };
 
-    var del = function(product_id, data, event){
+    var del = function (product_id, data, event) {
         $.ajax({
             method: "POST",
-            url: FL+"/cart",
+            url: FL + "/cart",
             data: {del: product_id}
-        }).done(function( responseText ) {
+        }).done(function (responseText) {
             var obj = $.parseJSON(responseText);
-            if ( obj.cart !== "" ) {
+            if (obj.cart !== "") {
                 $('#cart table tbody').html(obj.cart);
             } else {
-                if ( $('#modal_content').length ) {
+                if ($('#modal_content').length) {
                     $("body").css("overflow", "auto");
                     $('#modal').toggle();
                     $('#modal').find('#modal_content').empty();
@@ -41,11 +41,11 @@ var cart = (function() {
         });
     };
 
-    var upd = function() {
+    var upd = function () {
         $('#cart').ajaxSubmit({
-            beforeSubmit: function() {
+            beforeSubmit: function () {
             },
-            success: function(responseText) {
+            success: function (responseText) {
                 var obj = $.parseJSON(responseText);
                 $('#cart table tbody').html(obj.cart);
                 $('.total_cost').html(obj.total_cost);
@@ -54,8 +54,8 @@ var cart = (function() {
         });
     };
 
-    var show = function(event){
-        if ( $('#cart').length ) {
+    var show = function (event) {
+        if ($('#cart').length) {
             event.preventDefault();
             return false;
         }
@@ -63,23 +63,23 @@ var cart = (function() {
         $('#modal').html('<div id="modal_content"></div>');
         $.ajax({
             method: "POST",
-            url: FL+"/cart",
+            url: FL + "/cart",
             data: {popup: 1},
-        }).done(function(responseText) {
+        }).done(function (responseText) {
             $("body").css("overflow", "hidden");
             $('#modal').find('#modal_content').html(responseText);
             $('#modal').toggle();
             w_w = window.innerWidth;
-            if ( w_w >= 480 ) {
+            if (w_w >= 480) {
                 $('#modal_content').css('min-width', '500px');
             } else {
                 $('#modal_content').css('max-width', '250px');
             }
             w = $('#modal_content').width();
-            $('#modal_content').css('margin-left', -(w/2));
+            $('#modal_content').css('margin-left', -(w / 2));
             h = $('#modal_content').height();
             h_w = window.innerHeight;
-            if ( h_w-200 > h ) {
+            if (h_w - 200 > h) {
                 $('#modal_content').css('top', '15%');
             } else {
                 $('#modal_content').css('top', '2%');
@@ -91,22 +91,22 @@ var cart = (function() {
         return false;
     };
 
-    var exit = function(event){
+    var exit = function (event) {
         $("body").css("overflow", "auto");
         $('#modal').toggle();
         $('#modal').find('#modal_content').empty();
         return event.preventDefault();
     };
 
-    var add = function(product_id, data, event) {
+    var add = function (product_id, data, event) {
         $.ajax({
             method: "POST",
-            url: FL+"/cart",
+            url: FL + "/cart",
             data: {add: product_id},
-            beforeSend: function(data) {
+            beforeSend: function (data) {
 
             }
-        }).done(function(responseText) {
+        }).done(function (responseText) {
             console.log(responseText);
             var obj = $.parseJSON(responseText);
             $('.total_cost').html(obj.total_cost);
@@ -117,12 +117,12 @@ var cart = (function() {
     };
 
     return {
-        "spin": spin,
-        "upd": upd,
-        "add": add,
-        "del": del,
-        "show": show,
-        "exit": exit,
+        spin,
+        upd,
+        add,
+        del,
+        show,
+        exit,
     };
 
 }());

@@ -8,8 +8,6 @@ if (!defined('XFOR')) {
     die('Hacking attempt!');
 }
 
-require_once FRONT_DIR . '/product.func.php';
-
 // VIEWED PRODUCTS
 $block_viewed_products = '';
 
@@ -26,7 +24,7 @@ if (isset($_SESSION['viewed'])) {
     ");
 
     $tpl->load_template('random_products.tpl');
-    $data = getProductShort($config, $db, $tpl, $sql_result);
+    $data = Helper::getProductShort($config, $db, $tpl, $sql_result);
     $block_viewed_products = $data['goods'];
     $tpl->clear();
     unset($data, $tpl->result['goods']);
@@ -50,7 +48,7 @@ if (!empty($random_products)) {
     $row = unserialize($random_products);
     shuffle($row);
     $tpl->load_template('random_products.tpl');
-    $data = getProductShort($config, $db, $tpl, $row);
+    $data = Helper::getProductShort($config, $db, $tpl, $row);
     $block_random_products = $data['goods'];
     unset($data, $tpl->result['goods']);
 }

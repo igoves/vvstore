@@ -198,8 +198,6 @@ $addition .= showRow($lang['payment_method'], "
 ");
 
 
-
-
 $paypal = showRow($lang['live_account'], "
 <div class='col-md-3' >
     <input class='form-control' type=text name='save_con[live_account]' value='{$config['live_account']}' />
@@ -255,7 +253,6 @@ $paypal .= showRow($lang['return_url'], "
     <small>{$lang['paypal_text_5']}</small>
 </div>
 ");
-
 
 
 $admin = showRow($lang['pass'], "
@@ -337,5 +334,6 @@ if (isset($_POST['save'])) {
         ");
     }
 
-    msg('info', $lang['message'], $lang['setting_saved'] . ' <a class="btn btn-default" href="/' . AL . '/settings">' . $lang['go_to_list'] . '</a>');
+    msg('info', $lang['message'],
+        $lang['setting_saved'] . ' <a class="btn btn-default" href="/' . AL . '/settings">' . $lang['go_to_list'] . '</a>');
 }

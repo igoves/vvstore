@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 class template
 {
@@ -16,16 +18,15 @@ class template
     var $block_data = array();
     var $result = array('content' => '');
 
-    var $template_parse_time = 0;
-
     function set($name, $var)
     {
         if (is_array($var) && count($var)) {
             foreach ($var as $key => $key_var) {
                 $this->set($key, $key_var);
             }
-        } else
+        } else {
             $this->data[$name] = $var;
+        }
     }
 
     function set_block($name, $var)
@@ -34,8 +35,9 @@ class template
             foreach ($var as $key => $key_var) {
                 $this->set_block($key, $key_var);
             }
-        } else
+        } else {
             $this->block_data[$name] = $var;
+        }
     }
 
     function load_template($tpl_name)
@@ -114,8 +116,11 @@ class template
 
         $this->copy_template = str_replace($find, $replace, $this->copy_template);
 
-        if (isset($this->result[$tpl])) $this->result[$tpl] .= $this->copy_template;
-        else $this->result[$tpl] = $this->copy_template;
+        if (isset($this->result[$tpl])) {
+            $this->result[$tpl] .= $this->copy_template;
+        } else {
+            $this->result[$tpl] = $this->copy_template;
+        }
 
         $this->_clear();
 

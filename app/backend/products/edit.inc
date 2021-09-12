@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 if (isset($_POST['edit'])) {
     $id = (int)$_POST['product_id'];
@@ -14,10 +16,11 @@ if (isset($_POST['edit'])) {
     $date = $db->safesql($_POST['date_added']);
     $cost = empty($_POST['cost']) ? 0 : $db->safesql($_POST['cost']);
 
-    if (trim($alt_name) == "" or !$alt_name)
+    if (trim($alt_name) == "" or !$alt_name) {
         $alt_name = totranslit(stripslashes($name), true, false);
-    else
+    } else {
         $alt_name = totranslit(stripslashes($alt_name), true, false);
+    }
 
     $cat_id = (int)$_POST['cat'];
 
@@ -88,7 +91,8 @@ $row = $db->super_query("
 ");
 
 if (!$row['id']) {
-    msg('info', $lang['message'], 'Такого товара нет в базе <a class="btn btn-default" href="/' . AL . '/products">' . $lang['go_to_list'] . '</a>');
+    msg('info', $lang['message'],
+        'Такого товара нет в базе <a class="btn btn-default" href="/' . AL . '/products">' . $lang['go_to_list'] . '</a>');
 }
 
 $img_data = $db->super_query("

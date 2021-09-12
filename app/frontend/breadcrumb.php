@@ -15,9 +15,9 @@ function get_breadcrumd($id)
         return '';
     }
     $parent_id = $shop_cat[$id]['parent'];
-    $list = "<li><a href='" . get_url($id) . "' title='{$shop_cat[$id]['name']}'>{$shop_cat[$id]['name']}</a></li>";
+    $list = "<li><a href='" . Helper::getUrl($id) . "' title='{$shop_cat[$id]['name']}'>{$shop_cat[$id]['name']}</a></li>";
     while ($parent_id) {
-        $list = '<li><a href="' . FL . '/' . get_url($parent_id) . "\" title='" . $shop_cat[$parent_id]['name'] . "'>" . $shop_cat[$parent_id]['name'] . '</a></li>' . '  ' . $list;
+        $list = '<li><a href="' . FL . '/' . Helper::getUrl($parent_id) . "\" title='" . $shop_cat[$parent_id]['name'] . "'>" . $shop_cat[$parent_id]['name'] . '</a></li>' . '  ' . $list;
         $parent_id = $shop_cat[$parent_id]['parent'];
     }
     return $list;
