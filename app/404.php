@@ -56,7 +56,7 @@ $tpl->set('{content}', $tpl->result['404']);
 
 if (isset($_SERVER['HTTP_X_PJAX'])) {
     echo $metatags;
-    if ($config['debug'] === 0) {
+    if ((int)$config['debug'] === 0) {
         echo $tpl->result['content'];
     } else {
         echo htmlCompress($tpl->result['content']);
@@ -65,7 +65,7 @@ if (isset($_SERVER['HTTP_X_PJAX'])) {
 }
 
 $tpl->compile('main');
-if ($config['debug'] === 0) {
+if ((int)$config['debug'] === 0) {
     echo $tpl->result['main'];
 } else {
     echo htmlCompress($tpl->result['main']);

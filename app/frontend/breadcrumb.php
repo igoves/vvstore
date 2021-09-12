@@ -12,7 +12,7 @@ function get_breadcrumd($id)
 {
     global $shop_cat;
     if (!$id) {
-        return;
+        return '';
     }
     $parent_id = $shop_cat[$id]['parent'];
     $list = "<li><a href='" . get_url($id) . "' title='{$shop_cat[$id]['name']}'>{$shop_cat[$id]['name']}</a></li>";

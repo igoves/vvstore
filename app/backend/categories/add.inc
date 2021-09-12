@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 if (isset($_POST['add'])) {
 
@@ -13,22 +15,23 @@ if (isset($_POST['add'])) {
     $alt_name = $db->safesql($_POST['alt']);
     isset($_POST['status']) ? $status = 1 : $status = 0;
 
-    if (trim($alt_name) == "" or !$alt_name)
+    if (trim($alt_name) == "" or !$alt_name) {
         $alt_name = totranslit(stripslashes($name), true, false);
-    else
+    } else {
         $alt_name = totranslit(stripslashes($alt_name), true, false);
+    }
 
     $a = 0;
-    $sql = $db->query("
-        SELECT * FROM '" . PREFIX . "_categories' WHERE alt = '{$alt_name}'
-    ");
+    $sql = $db->query("SELECT * FROM '" . PREFIX . "_categories' WHERE alt = '{$alt_name}'");
 
     if ($db->num_rows($sql) == 0) {
         $alt = $alt_name;
         $a = 1;
     }
 
-    if ($a != 1) $alt = $alt_name . '_' . random(2);
+    if ($a !== 1) {
+        $alt = $alt_name . '_' . random(2);
+    }
 
     if (!empty($_POST['meta_title']) || !empty($_POST['meta_desc']) || !empty($_POST['meta_key'])) {
         if (!empty($_POST['meta_title'])) {
@@ -78,7 +81,6 @@ if (isset($_POST['add'])) {
     ');
 
 }
-
 
 $tpl->load_template('categories/edit.tpl');
 $tpl->set_block("'\\[act_edit\\](.*?)\\[/act_edit\\]'si", "");

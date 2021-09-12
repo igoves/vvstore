@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 $tpl = new template();
 $tpl->dir = ROOT_DIR . '/theme/backend/';
@@ -53,23 +55,19 @@ while ($row = $db->get_row($sql)) {
     $cat_parentid[$row['id']] = $row['parent'];
 }
 
-
-if ($mod === 'console') {
-    include ADMIN_DIR . '/console/console.php';
-} elseif (@file_exists(ADMIN_DIR . '/' . $mod . '/' . $mod . '.inc')) {
-    if (!empty($do)) {
-        include ADMIN_DIR . '/' . $mod . '/' . $mod . '.inc';
-        if (in_array($do, $do_list, true)) {
-            require_once ADMIN_DIR . '/' . $mod . '/' . $do . '.inc';
-        } else {
-            msgbox($lang['mod_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '/' . $mod . '">' . $lang['go_to_list'] . '</a>');
-        }
-    } else {
-        require_once ADMIN_DIR . '/' . $mod . '/list.inc';
+if (!empty($do)) {
+    $url = ADMIN_DIR . '/' . $mod . '/' . $do . '.inc';
+    if ( !@file_exists($url) ) {
+        msg('', '', $lang['mod_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '">' . $lang['go_to_list'] . '</a>');
     }
 } else {
-    msg('error', $lang['error'], $lang['mod_not_exist']);
+    $url = ADMIN_DIR . '/' . $mod . '/list.inc';
+    if ( !@file_exists($url) ) {
+        msg('', '', $lang['mod_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '">' . $lang['go_to_list'] . '</a>');
+    }
 }
+
+require_once $url;
 
 $tpl->load_template('main.tpl');
 $tpl->set('{top_menu}', array2ul(AL, [

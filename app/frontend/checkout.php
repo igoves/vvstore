@@ -8,7 +8,7 @@ if (!defined('XFOR')) {
     die('Hacking attempt!');
 }
 
-$cart = isset($_SESSION['cart']) && !empty($_SESSION['cart']) ? $_SESSION['cart'] : array();
+$cart = isset($_SESSION['cart']) && !empty($_SESSION['cart']) ? $_SESSION['cart'] : [];
 
 if (!isset($_POST['send'])) {
 
@@ -92,18 +92,19 @@ if (!isset($_POST['send'])) {
     $total_cost = 0;
 
     $cart = array_reverse($cart, true);
+    $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://';
 
     foreach ($cart as $id => $value) {
         $i++;
         $cost = $value['cost'];
         $qty = $cart[$id]['qty'];
 
-        $img = '<img src="http://' . $config['domen'] . $value['img'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" />';
+        $img = '<img src="' . $protocol . $config['domen'] . $value['img'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" />';
         $list_mail .= '
             <tr style="border-bottom:1px solid #ccc;">
                 <td>' . $i . '</td>
                 <td>' . $img . '</td>
-                <td><a href="http://' . $config['domen'] . FL . '/' . $id . '-' . $value['alt'] . '" target="_blank" title="' . $value['name'] . '">' . $value['name'] . '</a></td>
+                <td><a href="' . $protocol . $config['domen'] . FL . '/' . $id . '-' . $value['alt'] . '" target="_blank" title="' . $value['name'] . '">' . $value['name'] . '</a></td>
                 <td>' . $qty . ' ' . $lang['pc'] . '.</td>
                 <td>' . $cost . ' ' . $config['val'] . '</td>
                 <td>' . ($cost * $qty) . ' ' . $config['val'] . '</td>
@@ -205,12 +206,6 @@ if (!isset($_POST['send'])) {
         } else {
             $tpl->set_block("'\\[payment\\](.*?)\\[/payment\\]'si", '');
         }
-        // if ( empty($tel) && empty($city) && empty($email) ) {
-        // $tpl->set( '[empty_contacts]', "" );
-        // $tpl->set( '[/empty_contacts]', "" );
-        // } else {
-        // $tpl->set_block( "'\\[empty_contacts\\](.*?)\\[/empty_contacts\\]'si", "" );
-        // }
         $tpl->set('{order_table}', $order_table);
         $tpl->set('{num_zakaz}', $num_zakaz);
         $tpl->compile('mail_content');

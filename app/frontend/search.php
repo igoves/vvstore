@@ -4,13 +4,45 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 include FRONT_DIR . '/product.func.php';
 
 function strip_data($text)
 {
-    $quotes = array("\x27", "\x22", "\x60", "\t", "\n", "\r", "'", ",", "/", ";", ":", "@", "[", "]", "{", "}", "=", ")", "(", "*", "&", "^", "%", "$", "<", ">", "?", "!", '"');
+    $quotes = array(
+        "\x27",
+        "\x22",
+        "\x60",
+        "\t",
+        "\n",
+        "\r",
+        "'",
+        ",",
+        "/",
+        ";",
+        ":",
+        "@",
+        "[",
+        "]",
+        "{",
+        "}",
+        "=",
+        ")",
+        "(",
+        "*",
+        "&",
+        "^",
+        "%",
+        "$",
+        "<",
+        ">",
+        "?",
+        "!",
+        '"'
+    );
     $goodquotes = array('-', '+', '#');
     $repquotes = array("\-", "\+", "\#");
     $text = stripslashes($text);
@@ -23,10 +55,14 @@ function strip_data($text)
 $story = strip_data($_GET['story']);
 $navi = '';
 $cstart = isset($_GET['cstart']) ? (int)$_GET['cstart'] : 0;
-if ($cstart < 0) $cstart = 0;
+if ($cstart < 0) {
+    $cstart = 0;
+}
 $limit = $config['products_number'];
 
-if (empty($story)) include ENGINE_DIR . '/404.php';
+if (empty($story)) {
+    include APP_DIR . '/404.php';
+}
 
 if (empty($story) || mb_strlen($story, 'UTF-8') < 3) {
     $title = 'Результаты поиска';
@@ -79,7 +115,7 @@ if (empty($story) || mb_strlen($story, 'UTF-8') < 3) {
         $content = $data['goods'];
         $i = $data['i'];
 
-        include_once ENGINE_DIR . '/modules/shop/product.list.nav.php';
+        include_once APP_DIR . '/modules/shop/product.list.nav.php';
         $navi = $tpl->result['navi'];
     } else {
         $title = $lang['search_result'];
@@ -110,7 +146,7 @@ if (isset($_GET['ajax'])) {
 } else {
     $tpl->load_template('search.tpl');
     $titl_e = $lang['search_by_product'];
-    include_once ENGINE_DIR . '/modules/shop/breadcrumb.php';
+    include_once FRONT_DIR . '/breadcrumb.php';
     $tpl->set('{breadcrumb}', $tpl->result['breadcrumb']);
     $tpl->set('{pagination}', $navi);
 }

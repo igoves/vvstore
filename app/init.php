@@ -11,8 +11,9 @@ if (!defined('XFOR')) {
 $URI = strtolower($_SERVER['REQUEST_URI']);
 if (false !== strpos($_SERVER['REQUEST_URI'], '//')) {
     $URI = str_replace('//', '/', $_SERVER['REQUEST_URI']);
+    $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
     header('HTTP/1.1 301 Moved Permanently');
-    header('Location: http://' . $config['domen'] . $URI);
+    header('Location: ' . $protocol . $config['domen'] . $URI);
     die();
 }
 
@@ -57,7 +58,6 @@ switch ($do) {
         $map = new sitemap($config);
         echo $map->build_map();
         die();
-        break;
     case 'shop' :
         include FRONT_DIR . '/core.php';
         break;

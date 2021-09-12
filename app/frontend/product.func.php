@@ -13,21 +13,19 @@ function getProductShort($config, $db, $tpl, $sql, $i = 0)
 
     if (!is_array($sql)) {
         while ($row = $db->get_row($sql)) {
-
             fillDataShort($config, $tpl, $row);
-
             $i++;
-
         }
     } else {
         foreach ($sql as $key => $row) {
-
             fillDataShort($config, $tpl, $row);
             $i++;
         }
     }
 
-    if (!empty($tpl->result['goods'])) return array('goods' => $tpl->result['goods'], 'i' => $i);
+    if (!empty($tpl->result['goods'])) {
+        return array('goods' => $tpl->result['goods'], 'i' => $i);
+    }
 
 }
 

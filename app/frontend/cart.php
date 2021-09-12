@@ -16,13 +16,9 @@ if (!empty($_POST['add'])) {
     $qty = isset($_POST['qty']) ? (int)$_POST['qty'] : 1;
     if (!isset($cart[$id]['cost'])) {
         $data = $db->super_query("
-            SELECT 
-                *
-            FROM 
-                '" . PREFIX . "_products'
-            WHERE 
-                id = $id AND 
-                status = 1
+            SELECT *
+            FROM '" . PREFIX . "_products'
+            WHERE id = $id AND status = 1
         ");
         if (!empty($data['images'])) {
             $img1 = explode('|||', $data['images']);
@@ -61,7 +57,7 @@ if (isset($_POST['upd']) && $cart) {
 
 $_SESSION['cart'] = $cart;
 
-$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : '';
+$cart = $_SESSION['cart'] ?? '';
 $total_cost = 0;
 $total_qty = 0;
 if (!empty($cart)) {

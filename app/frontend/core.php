@@ -27,7 +27,9 @@ if (isset ($_GET['category'])) {
     $category = explode('/', $_GET['category']);
     $url[1] = end($category);
     $_cat_id = get_ID($shop_cat, end($category));
-    if (empty($_cat_id)) include APP_DIR . '/404.php';
+    if (empty($_cat_id)) {
+        include APP_DIR . '/404.php';
+    }
     $parent_id = $shop_cat[$_cat_id]['parent'];
     $cnt = 1;
     while ($parent_id) {
@@ -35,7 +37,9 @@ if (isset ($_GET['category'])) {
         $parent_id = $shop_cat[$parent_id]['parent'];
         $cnt++;
     }
-    if (count($category) !== $cnt) include APP_DIR . '/404.php';
+    if (count($category) !== $cnt) {
+        include APP_DIR . '/404.php';
+    }
     $count = $cnt;
     foreach ($category as $key => $value) {
         if (!in_array($value, $cat_alt) || $value != $url[$count]) {
@@ -46,13 +50,16 @@ if (isset ($_GET['category'])) {
     $category = end($category);
     $category = $db->safesql(strip_tags($category));
     $category_id = !empty($category) ? get_ID($shop_cat, $category) : false;
-} else $category = '';
-
+} else {
+    $category = '';
+}
 
 $productid = isset($_GET['productid']) ? (int)$_GET['productid'] : 0;
 $cstart = isset($_GET['cstart']) ? (int)$_GET['cstart'] : 0;
 
-if ($cstart < 0) $cstart = 0;
+if ($cstart < 0) {
+    $cstart = 0;
+}
 
 include FRONT_DIR . '/product.func.php';
 
@@ -62,17 +69,19 @@ if (isset($_GET['action']) && $_GET['action'] === 'cart') {
 
 if (isset($_GET['action']) && $_GET['action'] === 'checkout') {
     include FRONT_DIR . '/checkout.php';
-} else if ($productid) {
-    include FRONT_DIR . '/product.full.php';
 } else {
-    if (isset($_GET['category'])) {
-        $get_cats = get_sub_cats($category_id);
-        $get_cats = str_replace('|', ',', $get_cats);
-        foreach ($shop_cat as $cats) {
-            if ($cats['parent'] === $category_id) {
-                $get_sub_cats[] = $cats['id'];
+    if ($productid) {
+        include FRONT_DIR . '/product.full.php';
+    } else {
+        if (isset($_GET['category'])) {
+            $get_cats = get_sub_cats($category_id);
+            $get_cats = str_replace('|', ',', $get_cats);
+            foreach ($shop_cat as $cats) {
+                if ($cats['parent'] === $category_id) {
+                    $get_sub_cats[] = $cats['id'];
+                }
             }
         }
+        include FRONT_DIR . '/product.list.php';
     }
-    include FRONT_DIR . '/product.list.php';
 }
