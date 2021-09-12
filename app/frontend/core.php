@@ -24,23 +24,25 @@ $metatags = [
     'header_title' => ''
 ];
 
+require_once CLASSES_DIR . 'cart.class.php';
+
 switch ($do) {
     case 'static' :
         include FRONT_DIR . 'static.php';
         break;
     case 'sitemap' :
-        include_once CLASSES_DIR . 'sitemap.class.php';
+        require_once CLASSES_DIR . 'sitemap.class.php';
         $map = new sitemap($config);
         echo $map->build_map();
         die();
     case 'shop' :
-        include FRONT_DIR . 'shop.php';
+        require_once FRONT_DIR . 'shop.php';
         break;
     case 'search' :
-        include FRONT_DIR . 'search.php';
+        require_once FRONT_DIR . 'search.php';
         break;
     default :
-        include FRONT_DIR . 'start.php';
+        require_once FRONT_DIR . 'start.php';
         break;
 }
 

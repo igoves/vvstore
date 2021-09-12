@@ -8,42 +8,18 @@ if (!defined('XFOR')) {
     die('Hacking attempt!');
 }
 
-$cart = isset($_SESSION['cart']) && !empty($_SESSION['cart']) ? $_SESSION['cart'] : array();
+$cart = Cart::get();
 
 // add
 if (!empty($_POST['add'])) {
     $id = (int)$_POST['add'];
     $qty = isset($_POST['qty']) ? (int)$_POST['qty'] : 1;
-    if (!isset($cart[$id]['cost'])) {
-        $data = $db->super_query("
-            SELECT *
-            FROM '" . PREFIX . "_products'
-            WHERE id = $id AND status = 1
-        ");
-        if (!empty($data['images'])) {
-            $img1 = explode('|||', $data['images']);
-            $img = FL . '/uploads/products/sm/' . $img1[0];
-        } else {
-            $img = FL . '/theme/' . $config['lang'] . '/img/no_foto_s.png';
-        }
-        $cart[$id]['name'] = $data['name'];
-        $cart[$id]['alt'] = $data['alt'];
-        $cart[$id]['img'] = $img;
-        $cart[$id]['cost'] = $data['cost'] * $config['ratio'];
-    }
-    if (isset($cart[$id]['qty'])) {
-        $cart[$id]['qty'] += $qty;
-    } else {
-        $cart[$id]['qty'] = $qty;
-    }
+    Cart::add($id, $qty);
 }
 
 // del
 if (!empty($_POST['del'])) {
-    $id = (int)$_POST['del'];
-    if ($cart) {
-        unset($cart[$id]);
-    }
+    Cart::del($_POST['del']);
 }
 
 // upd
@@ -106,10 +82,10 @@ if (isset($_POST['popup'])) {
 
 } elseif (isset($_POST['add'])) {
 
-    $data = array(
+    $data = [
         'total_qty' => $total_qty,
         'total_cost' => $total_cost
-    );
+    ];
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
     die();
 
