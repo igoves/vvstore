@@ -12,7 +12,7 @@ $list = '';
 function DisplayCategories($parentid = 0, $sublevelmarker = '')
 {
     global $shop_cat, $list, $lang;
-    if ($parentid == 0) {
+    if ($parentid === 0) {
         $class = 'warning';
     } else {
         $sublevelmarker .= '&nbsp;---';
@@ -52,8 +52,13 @@ function DisplayCategories($parentid = 0, $sublevelmarker = '')
                 $shop_cat[$id]['status'] == '1' ? $shop_cat[$id]['status'] = '<a href="/' . AL . '/categories/status/' . $shop_cat[$id]['id'] . '" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open"></span>' : $shop_cat[$id]['status'] = '<a href="/' . AL . '/categories/status/' . $shop_cat[$id]['id'] . '" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-eye-close"></a>';
 
                 $list .= "
+                    <td style='vertical-align:middle; text-align: center'>
+                        <a href='/" . AL . "/categories/edit/{$shop_cat[$id]['id']}' title='{$lang['not_active']}' class='btn btn-sm btn-warning'>
+                            <span class='glyphicon glyphicon-pencil'></span>
+                        </a>
+                    </td>
                     <td><div align=center><div class=\"btn-group\">{$shop_cat[$id]['status']}{$full_link}</div></div></td>
-                    <td><div align=center><a class=\"btn btn-danger btn-sm\" href='/" . AL . "/categories/del/" . $shop_cat[$id]['id'] . "'><span class=\"glyphicon glyphicon-remove\"></span></a></div></td>
+                    <td><div align=center><a class=\"btn btn-danger btn-sm\" href='/" . AL . "/categories/del/" . $shop_cat[$id]['id'] . "'><span class=\"glyphicon glyphicon-trash\"></span></a></div></td>
                     </tr>";
                 DisplayCategories($id, $sublevelmarker);
             }
@@ -79,7 +84,7 @@ if (isset($_POST['update_position'])) {
         ");
     }
 
-    msg('info', $lang['message'],
+    Helper::msg('info', $lang['message'],
         $lang['pos_updated'] . ' <a class="btn btn-default" href="/' . AL . '/categories">' . $lang['go_to_list'] . '</a>');
 
 }

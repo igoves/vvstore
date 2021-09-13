@@ -94,6 +94,6 @@ $tpl->set("{meta_desc}", '');
 $tpl->set("{meta_key}", '');
 $tpl->set("{status}", 'checked');
 $tpl->set("{AL}", AL);
-$tpl->set("{catlist}", CategorySelection());
+$tpl->set("{catlist}", Helper::CategorySelection());
 $tpl->compile('content');
 $tpl->clear();

@@ -1,5 +1,5 @@
 <h3 class="form-group" style="margin-top:0">
-    Товары
+    Products
     <a href="/{AL}/products/add" class="btn btn-default pull-right">
         <span class="glyphicon glyphicon-plus"></span>
     </a>
@@ -8,22 +8,27 @@
 <table class="table table-hover table-bordered table-striped table-condensed">
     <thead>
     <tr>
-        <th>Название</th>
+        <th>Title</th>
         <th style='width:90px'>
-            <div align=center>Цена, {cur}</div>
+            {cur}
+        </th>
+        <th style='width:50px'>
+            <div class="tip" style="display:block; text-align:center;" title='Edit'>
+                <span class="glyphicon glyphicon-pencil"></span>
+            </div>
         </th>
         <th style='width:105px'>
                 <span style=" width:37px; display:block; float:left; text-align:right;" class="tip"
-                      title="Активен / Не активен">
+                      title="Active / Not active">
                     <span class="glyphicon glyphicon-eye-open"></span>
                 </span>
-            <span style="width:35px; display:block; float:left; text-align:right;" class="tip" title="Перейти">
+            <span style="width:35px; display:block; float:left; text-align:right;" class="tip" title="Go to">
                     <span class="glyphicon glyphicon-share-alt"></span>
                 </span>
         </th>
-        <th style='width:70px'>
-            <div class="tip" style="display:block; text-align:center;" title='Удалить'>
-                <span class="glyphicon glyphicon-remove"></span>
+        <th style='width:50px'>
+            <div class="tip" style="display:block; text-align:center;" title='Delete'>
+                <span class="glyphicon glyphicon-trash"></span>
             </div>
         </th>
     </tr>

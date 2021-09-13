@@ -131,7 +131,7 @@ $tpl->set('[act_edit]', '');
 $tpl->set('[/act_edit]', '');
 $status = $row['status'] == 1 ? ' checked' : '';
 $tpl->set('{status}', $status);
-$tpl->set('{catlist}', CategorySelection($row['cat_id'], 0));
+$tpl->set('{catlist}', Helper::CategorySelection($row['cat_id'], 0));
 $tpl->set('{AL}', AL);
 $tpl->set('{alt}', $row['alt']);
 $tpl->set('{date_added}', $row['date_added']);

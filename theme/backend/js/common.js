@@ -119,6 +119,20 @@ var init_ajax = function () {
                 labels: months_list,
                 datasets: orders_list
             },
+            options: {
+                responsive: true,
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                min: 0,
+                                beginAtZero: true,
+                                stepSize: 1
+                            }
+                        }
+                    ]
+                }
+            }
         });
     }
 

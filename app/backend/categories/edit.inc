@@ -118,7 +118,7 @@ $tpl->set('{id}', $row['id']);
 $tpl->set('{name}', htmlspecialchars($row['name']));
 $tpl->set('{alt}', $row['alt']);
 $row['status'] == 1 ? $status = ' checked' : $status = '';
-$tpl->set('{catlist}', CategorySelection($id, 0));
+$tpl->set('{catlist}', Helper::CategorySelection($id, 0));
 $tpl->set('{desc}', stripslashes($row['desc']));
 $tpl->set('{status}', $status);
 $tpl->set('{AL}', AL);

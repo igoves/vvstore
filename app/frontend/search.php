@@ -54,7 +54,7 @@ if (empty($story) || mb_strlen($story, 'UTF-8') < 3) {
                 ( name LIKE '%$story%' OR desc LIKE '%$story%') AND 
                 status = 1
         ");
-        $txt_goods = pluralForm($count_all, $lang['product1'], $lang['product2'], $lang['product3']);
+        $txt_goods = Helper::pluralForm($count_all, $lang['product1'], $lang['product2'], $lang['product3']);
 
         $title = $lang['for_your_request'] . ' "' . $story . '" ' . $lang['found'] . ' ' . $count_all . ' ' . $txt_goods;
 

@@ -141,7 +141,7 @@ $tpl->set('{img}', $img);
 $tpl->set_block("'\\[act_edit\\](.*?)\\[/act_edit\\]'si", '');
 $tpl->set('[act_add]', '');
 $tpl->set('[/act_add]', '');
-$tpl->set('{catlist}', CategorySelection());
+$tpl->set('{catlist}', Helper::CategorySelection());
 $tpl->set('{date_added}', date('Y-m-d H:i:s'));
 $tpl->set('{AL}', AL);
 $tpl->set('{alt}', '');
