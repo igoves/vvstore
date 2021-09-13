@@ -1,13 +1,13 @@
-На сайте {domain} пользователь {fio} оставил заказ. <br/><br/>
+User {fio} has placed an order on the site {domain}.<br/><br/>
 
-Его контактные данные:<br/>
-[tel]Номер телефона: {tel}<br/>[/tel]
-[city]Город: {city}<br/>[/city]
-[email]Email адрес: {email}<br/>[/email]
+His contact details:<br/>
+[tel]Phone: {tel}<br/>[/tel]
+[city]City: {city}<br/>[/city]
+[email]Email: {email}<br/>[/email]
 <br/>
-[delivery]Доставка: {delivery}<br/>[/delivery]
+[delivery]Delivery: {delivery}<br/>[/delivery]
 [otd]{otd}<br/>[/otd]
-[payment]Оплата: {payment}<br/>[/payment]
+[payment]Payment: {payment}<br/>[/payment]
 <br/>
-Его заказ # {num_zakaz}:<br/>
+Order # {num_zakaz}:<br/>
 {order_table}<br/>

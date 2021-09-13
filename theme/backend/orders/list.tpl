@@ -16,9 +16,9 @@
                     <span class='glyphicon glyphicon-ok'></span>
                 </span>
             </th>
-            <th style='width:70px; text-align:center;'>
+            <th style='width:50px; text-align:center;'>
                 <div class="tip" style="display:block; text-align:center;" title='Удалить'>
-                    <span class="glyphicon glyphicon-remove"></span>
+                    <span class="glyphicon glyphicon-trash"></span>
                 </div>
             </th>
         </tr>

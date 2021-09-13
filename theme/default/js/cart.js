@@ -30,7 +30,7 @@ var cart = (function () {
                 } else {
                     $('#mc').html('\
                     <div class="alert alert-warning text-center" style="margin-bottom: 0;">\
-                        Ваша корзина пуста\
+                        Your cart is empty\
                     </div>\
                     ');
                 }

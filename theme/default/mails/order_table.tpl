@@ -2,18 +2,18 @@
 	<thead>
 		<tr style="border-bottom:1px solid #ccc;">
 			<th>№</th>
-			<th>Фото</th>
-			<th>Название</th>
-			<th>К-во</th>
-			<th>Цена</th>
-			<th>Всего</th>
+			<th>Photo</th>
+			<th>Title</th>
+			<th>Qty</th>
+			<th>Price</th>
+			<th>Total</th>
 		</tr>
 	</thead>
 	<tbody>
 		{list}
 		<tr style="font-size:24px">
 			<td colspan="5" style="text-align:right">
-				Всего к оплате:
+				Total:
 			</td>
 			<td style="border-top: 1px solid #cccccc; text-align:right;">
 				{total_cost} {cur}
