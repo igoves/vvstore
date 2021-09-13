@@ -47,9 +47,18 @@ while ($row = $db->get_row($result)) {
         ';
     }
 
+    $image = '';
+    if (!empty($row['images'])) {
+        $listimages = explode("|||", $row['images']);
+        $image = '<img style="height:28px; margin-right:5px;" src="' . FL . '/uploads/products/sm/' . $listimages[0] . '">';
+    }
+
     $list .= "
     <tr>
         <td style='vertical-align:middle'>
+            <a href='/" . AL . "/products/edit/{$row['id']}' >
+            {$image}
+            </a>
             <a href='/" . AL . "/products/edit/{$row['id']}' >
                 {$row['name']}
             </a>

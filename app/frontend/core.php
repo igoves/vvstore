@@ -73,6 +73,7 @@ if (!empty($_SESSION['cart'])) {
 $tpl->load_template('main.tpl');
 $tpl->set('{total_qty}', $total_qty);
 $tpl->set('{total_cost}', $total_cost);
+$tpl->set('{lang}', $config['lang']);
 $tpl->set('{Y}', date('Y'));
 $tpl->set('{address}', $config['address']);
 $tpl->set('{cur}', $config['cur']);

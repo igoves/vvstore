@@ -25,7 +25,7 @@ function get_breadcrumd($id)
 
 $s_nav = "
     <li>
-        <a href='" . FL . "' title='{$config['home_title']}'>
+        <a href='/" . FL . "' title='{$config['home_title']}'>
             {$config['short_title']}
         </a>
     </li>

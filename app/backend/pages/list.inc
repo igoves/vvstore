@@ -41,6 +41,11 @@ while ($row = $db->get_row($sql)) {
             {$row['alt']}.html
         </td>
         <td align=center>
+            <a class='btn btn-warning btn-sm' href='/{AL}/pages/edit/{$row['id']}'>
+                <span class='glyphicon glyphicon-pencil'></span>
+            </a>
+        </td>
+        <td align=center>
             <a rel='noajax' class='btn btn-default btn-sm' href='" . FL . "/{$row['alt']}.html' target='_blank' title='{$lang['link']}'>
                 <span class='glyphicon glyphicon-share-alt'></span>
             </a>

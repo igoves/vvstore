@@ -15,10 +15,13 @@
         <th>Template</th>
         <th>URL</th>
         <th style='width:50px;text-align:center;'>
-            <span title='Перейти' class="tip glyphicon glyphicon-share-alt"></span>
+            <span title='Edit' class="tip glyphicon glyphicon-pencil"></span>
         </th>
         <th style='width:50px;text-align:center;'>
-            <span title='Удалить' class="tip glyphicon glyphicon-trash"></span>
+            <span title='Go to' class="tip glyphicon glyphicon-share-alt"></span>
+        </th>
+        <th style='width:50px;text-align:center;'>
+            <span title='Delete' class="tip glyphicon glyphicon-trash"></span>
         </th>
     </tr>
     </thead>

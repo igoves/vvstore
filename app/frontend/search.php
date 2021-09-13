@@ -68,7 +68,8 @@ if (empty($story) || mb_strlen($story, 'UTF-8') < 3) {
         $i = $data['i'];
 
 //        include_once FRONT_DIR . '/modules/shop/product.list.nav.php';
-        $navi = $tpl->result['navi'];
+//        $navi = $tpl->result['navi'];
+        $navi = '';
     } else {
         $title = $lang['search_result'];
         $content = '
