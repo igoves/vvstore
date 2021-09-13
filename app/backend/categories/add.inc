@@ -46,7 +46,7 @@ if (isset($_POST['add'])) {
             $metatags['keywords'] = $db->safesql($_POST['meta_key']);
         }
     } else {
-        $metatags = create_metatags($name . ' ' . $desc);
+        $metatags = Helper::create_metatags($name . ' ' . $desc);
     }
 
     $parent = (int)$_POST['cat'];
@@ -61,7 +61,7 @@ if (isset($_POST['add'])) {
 
     $db->query("UPDATE '" . PREFIX . "_categories' SET posi=id WHERE id='{$id}'");
 
-    msg("info", $lang['message'], '
+    Helper::msg("info", $lang['message'], '
         ' . $lang['cat_added'] . ' 
             <a class="btn btn-default" href="/' . AL . '/categories/add">
                 <span class="glyphicon glyphicon-plus"></span> 

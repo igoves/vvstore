@@ -38,9 +38,9 @@ if ($row['id']) {
         UPDATE '" . PREFIX . "_products' SET cat_id = 0 WHERE cat_id = $id
     ");
     DeleteSubcategories($id);
-    msg('info', $lang['message'],
+    Helper::msg('info', $lang['message'],
         $lang['cat_deleted'] . ' <a class="btn btn-default" href="/' . AL . '/categories">' . $lang['go_to_list'] . '</a>');
 } else {
-    msg('info', $lang['message'],
+    Helper::msg('info', $lang['message'],
         $lang['no_such_cat'] . ' <a class="btn btn-default" href="/' . AL . '/categories">' . $lang['go_to_list'] . '</a>');
 }

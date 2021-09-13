@@ -28,10 +28,10 @@ if (isset($_POST['images']) && $_POST['images'] === 'images_upload') {
     $json_array = array();
 
     for ($i = 0; $i <= $total_file - 1; $i++) {
-        $fileTypes = array('jpg', 'jpeg', 'gif', 'png');
+        $fileTypes = ['jpg', 'jpeg', 'gif', 'png'];
         $fileParts = pathinfo(mb_strtolower($_FILES['images']['name'][$i]));
 
-        $name = mb_convert_encoding(totranslit($_FILES['images']['name'][$i]), 'Windows-1251', 'auto');
+        $name = mb_convert_encoding(Helper::totranslit($_FILES['images']['name'][$i]), 'Windows-1251', 'auto');
         // $name = time() . "_" . $name;
         // $name = time() . '_' . $i . '.' . $fileParts['extension'];
         $name = time() . uniqid('', true) . '_' . $name;
@@ -117,7 +117,7 @@ if (isset($_POST['images']) && $_POST['images'] === 'images_upload') {
                 INSERT INTO '" . PREFIX . "_products_images'
                     (images, product_id, date)
                 VALUES
-                    ('{$inserts}', 0, '$dateNow')
+                    ('{$inserts}', 0, 'now')
             ");
         } else {
             if ($row['images'] == '') {
@@ -157,7 +157,7 @@ if (isset($_POST['images']) && $_POST['images'] === 'images_upload') {
                 INSERT INTO '" . PREFIX . "_products_images'
                     (images, product_id, date)
                 VALUES 
-                    ('{$inserts}', $product_id, '$dateNow')
+                    ('{$inserts}', $product_id, 'now')
             ");
 
         } else {

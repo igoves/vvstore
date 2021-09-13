@@ -26,7 +26,7 @@ if (isset($_POST['edit'])) {
             $metatags['keywords'] = $db->safesql($_POST['meta_key']);
         }
     } else {
-        $metatags = create_metatags($name . ' ' . $desc);
+        $metatags = Helper::create_metatags($name . ' ' . $desc);
     }
     $metatags['title'] = empty($metatags['title']) ? '' : $metatags['title'];
 
@@ -36,7 +36,7 @@ if (isset($_POST['edit'])) {
     if ($row1['alt']) {
         $real_alt = $row1['alt'];
     } else {
-        msg("info", $lang['message'],
+        Helper::msg("info", $lang['message'],
             $lang['page_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '/pages">' . $lang['go_to_list'] . '</a>');
     }
 
@@ -71,7 +71,7 @@ if (isset($_POST['edit'])) {
             WHERE id = $id
         ");
 
-        msg('info', $lang['message'], '
+        Helper::msg('info', $lang['message'], '
             ' . $lang['editing_completed'] . '
                 <a class="btn btn-default" href="/' . AL . '/pages/add">
                     <span class="glyphicon glyphicon-plus"></span> 
@@ -91,7 +91,7 @@ if (isset($_POST['edit'])) {
         ');
 
     } else {
-        msg('info', $lang['message'],
+        Helper::msg('info', $lang['message'],
             $lang['page_exist'] . ' <a class="btn btn-default" href="/' . AL . '/pages">' . $lang['go_to_list'] . '</a>');
     }
 
@@ -101,7 +101,7 @@ if (isset($_POST['edit'])) {
 $id = (int)$_GET['id'];
 $row = $db->super_query("SELECT * FROM '" . PREFIX . "_pages' WHERE id = $id");
 if (!$row['id']) {
-    msg('info', $lang['message'],
+    Helper::msg('info', $lang['message'],
         $lang['page_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '/pages">' . $lang['go_to_list'] . '</a>');
 }
 $tpl->load_template('pages/edit.tpl');

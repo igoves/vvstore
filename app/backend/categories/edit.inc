@@ -18,9 +18,9 @@ if (isset($_POST['edit'])) {
     $status = isset($_POST['status']) ? 1 : 0;
 
     if (trim($alt_name) == "" or !$alt_name) {
-        $alt_name = totranslit(stripslashes($name), true, false);
+        $alt_name = Helper::totranslit(stripslashes($name), true, false);
     } else {
-        $alt_name = totranslit(stripslashes($alt_name), true, false);
+        $alt_name = Helper::totranslit(stripslashes($alt_name), true, false);
     }
 
     $row = $db->super_query("SELECT * FROM '" . PREFIX . "_categories' WHERE id = $id");
@@ -30,7 +30,7 @@ if (isset($_POST['edit'])) {
         }
         $real_alt = $row['alt'];
     } else {
-        msg("info", $lang['message'],
+        Helper::msg("info", $lang['message'],
             $lang['no_such_cat'] . ' <a class="btn btn-default" href="/' . AL . '/categories">' . $lang['go_to_list'] . '</a>');
     }
 
@@ -63,7 +63,7 @@ if (isset($_POST['edit'])) {
             $metatags['keywords'] = $db->safesql($_POST['meta_key']);
         }
     } else {
-        $metatags = create_metatags($name . ' ' . $desc);
+        $metatags = Helper::create_metatags($name . ' ' . $desc);
     }
 
     $db->query("
@@ -79,7 +79,7 @@ if (isset($_POST['edit'])) {
         WHERE id = $id
     ");
 
-    msg('info', $lang['message'], '
+    Helper::msg('info', $lang['message'], '
         ' . $lang['cat_edited'] . ' 
             <a class="btn btn-default" href="/' . AL . '/categories/add">
                 <span class="glyphicon glyphicon-plus"></span> 
@@ -106,7 +106,7 @@ $id = (int)$_GET['id'];
 $row = $db->super_query("SELECT * FROM '" . PREFIX . "_categories' WHERE id = '$id'");
 
 if (!$row['id']) {
-    msg('info', $lang['message'],
+    Helper::msg('info', $lang['message'],
         $lang['no_such_cat'] . ' <a class="btn btn-default" href="/' . AL . '/categories">' . $lang['go_to_list'] . '</a>');
 }
 

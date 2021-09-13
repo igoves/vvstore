@@ -26,15 +26,15 @@ if (isset($_POST['add'])) {
             $metatags['keywords'] = $_POST['meta_key'];
         }
     } else {
-        $metatags = create_metatags($name . ' ' . $desc);
+        $metatags = Helper::create_metatags($name . ' ' . $desc);
     }
     $metatags['title'] = empty($metatags['title']) ? '' : $metatags['title'];
 
     $a = 0;
 
     $alt_name = empty($alt_name) ?
-        totranslit(stripslashes($name), true, false) :
-        totranslit(stripslashes($alt_name), true, false);
+        Helper::totranslit(stripslashes($name), true, false) :
+        Helper::totranslit(stripslashes($alt_name), true, false);
 
     $row = $db->super_query("SELECT * FROM '" . PREFIX . "_pages' WHERE alt = '{$alt_name}'");
 
@@ -42,7 +42,7 @@ if (isset($_POST['add'])) {
         $a = 1;
     }
 
-    if ($a == 1) {
+    if ($a === 1) {
 
         $db->query("
             INSERT INTO
@@ -53,8 +53,8 @@ if (isset($_POST['add'])) {
         ");
         $id = $db->insert_id();
 
-        msg('info', $lang['message'], '
-            ' . $lang['succes_added'] . ' 
+        Helper::msg('info', $lang['message'], '
+            ' . $lang['success_added'] . ' 
                 <a class="btn btn-default" href="/' . AL . '/pages/add">
                     <span class="glyphicon glyphicon-plus"></span> 
                     ' . $lang['add_more'] . '
@@ -74,7 +74,7 @@ if (isset($_POST['add'])) {
 
 
     } else {
-        msg('info', $lang['message'],
+        Helper::msg('info', $lang['message'],
             $lagn['msg_e1'] . ' <a class="btn btn-default" href="/' . AL . '/pages">' . $lang['go_to_list'] . '</a>');
     }
 

@@ -17,9 +17,9 @@ if (isset($_POST['edit'])) {
     $cost = empty($_POST['cost']) ? 0 : $db->safesql($_POST['cost']);
 
     if (trim($alt_name) == "" or !$alt_name) {
-        $alt_name = totranslit(stripslashes($name), true, false);
+        $alt_name = Helper::totranslit(stripslashes($name), true, false);
     } else {
-        $alt_name = totranslit(stripslashes($alt_name), true, false);
+        $alt_name = Helper::totranslit(stripslashes($alt_name), true, false);
     }
 
     $cat_id = (int)$_POST['cat'];
@@ -40,7 +40,7 @@ if (isset($_POST['edit'])) {
             $metatags['keywords'] = $db->safesql($_POST['meta_key']);
         }
     } else {
-        $metatags = create_metatags($name . ' ' . $desc);
+        $metatags = Helper::create_metatags($name . ' ' . $desc);
     }
 
     $db->query("
@@ -64,7 +64,7 @@ if (isset($_POST['edit'])) {
 
     $perehod = $status == 1 ? " {$lang['or']} <a rel='noajax' class='btn btn-default' target='_blank' href='/" . $id . "-" . $alt_name . "'>" . $lang['open_on_site'] . " <span class='glyphicon glyphicon-share-alt'></span></a>" : "";
 
-    msg('info', $lang['message'], '
+    Helper::msg('info', $lang['message'], '
         ' . $lang['editing_completed'] . '
             <a class="btn btn-default" href="/' . AL . '/products/add">
                 <span class="glyphicon glyphicon-plus"></span> 
