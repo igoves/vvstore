@@ -47,7 +47,7 @@ while ($row = $db->get_row($sql)) {
         </td>
         <td align=center>
             <a class='btn btn-danger btn-sm' href='/{AL}/pages/del/{$row['id']}'>
-                <span class='glyphicon glyphicon-remove'></span>
+                <span class='glyphicon glyphicon-trash'></span>
             </a>
         </td>
     </tr>";

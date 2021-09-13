@@ -1,11 +1,9 @@
-<div class="form-group">
-    <h3 style="margin-top:0">
-        Categories
-        <a href="/{AL}/categories/add" class="btn btn-default pull-right">
-            <span class="glyphicon glyphicon-plus"></span>
-        </a>
-    </h3>
-</div>
+<h3 class="form-group" style="margin-top:0">
+    Categories
+    <a href="/{AL}/categories/add" class="btn btn-default pull-right">
+        <span class="glyphicon glyphicon-plus"></span>
+    </a>
+</h3>
 
 <form method="post" action="" class="ajaxform category_list">
     <table class="table table-hover table-bordered table-striped table-condensed">

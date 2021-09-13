@@ -1,13 +1,13 @@
 <h3 class="form-group" style="margin-top:0">
-    Заказы
+    Orders
 </h3>
 
 <table class="table table-hover table-bordered table-striped table-condensed">
     <thead>
         <tr>
             <th>ID</th>
-            <th style='width:270px'>Покупатель</th>
-            <th>Заказ</th>
+            <th style='width:270px'>Customer</th>
+            <th>Order</th>
             <th style='width:105px'>
                 <span style=" width:37px; display:block; float:left; text-align:right;" class="tip" title="Править">
                     <span class="glyphicon glyphicon-pencil"></span>
