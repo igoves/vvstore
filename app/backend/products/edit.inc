@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 if (isset($_POST['edit'])) {
     $id = (int)$_POST['product_id'];
@@ -14,10 +16,11 @@ if (isset($_POST['edit'])) {
     $date = $db->safesql($_POST['date_added']);
     $cost = empty($_POST['cost']) ? 0 : $db->safesql($_POST['cost']);
 
-    if (trim($alt_name) == "" or !$alt_name)
-        $alt_name = totranslit(stripslashes($name), true, false);
-    else
-        $alt_name = totranslit(stripslashes($alt_name), true, false);
+    if (trim($alt_name) == "" or !$alt_name) {
+        $alt_name = Helper::totranslit(stripslashes($name), true, false);
+    } else {
+        $alt_name = Helper::totranslit(stripslashes($alt_name), true, false);
+    }
 
     $cat_id = (int)$_POST['cat'];
 
@@ -37,7 +40,7 @@ if (isset($_POST['edit'])) {
             $metatags['keywords'] = $db->safesql($_POST['meta_key']);
         }
     } else {
-        $metatags = create_metatags($name . ' ' . $desc);
+        $metatags = Helper::create_metatags($name . ' ' . $desc);
     }
 
     $db->query("
@@ -61,7 +64,7 @@ if (isset($_POST['edit'])) {
 
     $perehod = $status == 1 ? " {$lang['or']} <a rel='noajax' class='btn btn-default' target='_blank' href='/" . $id . "-" . $alt_name . "'>" . $lang['open_on_site'] . " <span class='glyphicon glyphicon-share-alt'></span></a>" : "";
 
-    msg('info', $lang['message'], '
+    Helper::msg('info', $lang['message'], '
         ' . $lang['editing_completed'] . '
             <a class="btn btn-default" href="/' . AL . '/products/add">
                 <span class="glyphicon glyphicon-plus"></span> 
@@ -88,7 +91,8 @@ $row = $db->super_query("
 ");
 
 if (!$row['id']) {
-    msg('info', $lang['message'], 'Такого товара нет в базе <a class="btn btn-default" href="/' . AL . '/products">' . $lang['go_to_list'] . '</a>');
+    msg('info', $lang['message'],
+        'Такого товара нет в базе <a class="btn btn-default" href="/' . AL . '/products">' . $lang['go_to_list'] . '</a>');
 }
 
 $img_data = $db->super_query("
@@ -127,7 +131,7 @@ $tpl->set('[act_edit]', '');
 $tpl->set('[/act_edit]', '');
 $status = $row['status'] == 1 ? ' checked' : '';
 $tpl->set('{status}', $status);
-$tpl->set('{catlist}', CategorySelection($row['cat_id'], 0));
+$tpl->set('{catlist}', Helper::CategorySelection($row['cat_id'], 0));
 $tpl->set('{AL}', AL);
 $tpl->set('{alt}', $row['alt']);
 $tpl->set('{date_added}', $row['date_added']);
@@ -138,6 +142,6 @@ $tpl->set('{meta_title}', $row['meta_title']);
 $tpl->set('{meta_desc}', $row['meta_desc']);
 $tpl->set('{meta_key}', $row['meta_key']);
 $tpl->set('{cost}', $row['cost']);
-$tpl->set('{val}', $config['val']);
+$tpl->set('{cur}', $config['cur']);
 $tpl->compile('content');
 $tpl->clear();

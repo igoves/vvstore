@@ -4,10 +4,17 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
+
+$do = !isset($do) && isset($_GET['do']) ? Helper::totranslit($db->safesql($_GET['do'])) : '';
+$mod = isset($_GET['m']) ? $db->safesql($_GET['m']) : 'console';
+
+$lang = $lang['back'];
 
 $tpl = new template();
-$tpl->dir = ROOT_DIR . '/theme/backend/';
+$tpl->dir = ADMIN_THEME;
 define('TEMPLATE_DIR', $tpl->dir);
 $tpl->clear();
 
@@ -33,12 +40,7 @@ if (!isset($_SESSION['password']) || $_SESSION['password'] !== $config['pass']) 
     $tpl->set('{AL}', AL);
     $tpl->set('{FL}', FL);
     $tpl->compile('auth');
-    if ((int)$config['debug'] === 0) {
-        echo htmlCompress($tpl->result['auth']);
-    } else {
-        echo $tpl->result['auth'];
-    }
-    $tpl->global_clear();
+    echo (int)$config['debug'] === 0 ? Helper::htmlCompress($tpl->result['auth']) : $tpl->result['auth'];
     die();
 }
 
@@ -53,26 +55,22 @@ while ($row = $db->get_row($sql)) {
     $cat_parentid[$row['id']] = $row['parent'];
 }
 
-
-if ($mod === 'console') {
-    include ADMIN_DIR . '/console/console.php';
-} elseif (@file_exists(ADMIN_DIR . '/' . $mod . '/' . $mod . '.inc')) {
-    if (!empty($do)) {
-        include ADMIN_DIR . '/' . $mod . '/' . $mod . '.inc';
-        if (in_array($do, $do_list, true)) {
-            require_once ADMIN_DIR . '/' . $mod . '/' . $do . '.inc';
-        } else {
-            msgbox($lang['mod_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '/' . $mod . '">' . $lang['go_to_list'] . '</a>');
-        }
-    } else {
-        require_once ADMIN_DIR . '/' . $mod . '/list.inc';
+if (!empty($do)) {
+    $url = BACKEND_DIR . '/' . $mod . '/' . $do . '.inc';
+    if ( !@file_exists($url) ) {
+        msg('', '', $lang['mod_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '">' . $lang['go_to_list'] . '</a>');
     }
 } else {
-    msg('error', $lang['error'], $lang['mod_not_exist']);
+    $url = BACKEND_DIR . '/' . $mod . '/list.inc';
+    if ( !@file_exists($url) ) {
+        msg('', '', $lang['mod_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '">' . $lang['go_to_list'] . '</a>');
+    }
 }
 
+require_once $url;
+
 $tpl->load_template('main.tpl');
-$tpl->set('{top_menu}', array2ul(AL, [
+$tpl->set('{top_menu}', Helper::array2ul(AL, [
     '' => '<span class="glyphicon glyphicon-home"></span>',
     '/products' => $lang['goods'],
     '/categories' => $lang['categories'],
@@ -88,21 +86,10 @@ $tpl->set('[/is_logged]', '');
 $tpl->set('{content}', $tpl->result['content']);
 
 if (isset($_SERVER['HTTP_X_PJAX'])) {
-    if ((int)$config['debug'] === 0) {
-        echo htmlCompress($tpl->result['content']);
-    } else {
-        echo $tpl->result['content'];
-    }
+    echo (int)$config['debug'] === 0 ? Helper::htmlCompress($tpl->result['content']) : $tpl->result['content'];
     die();
 }
 
 $tpl->compile('main');
-if ((int)$config['debug'] === 0) {
-    echo htmlCompress($tpl->result['main']);
-} else {
-    echo $tpl->result['main'];
-}
 
-$tpl->global_clear();
-$db->close();
-die();
+echo (int)$config['debug'] === 0 ? Helper::htmlCompress($tpl->result['main']) : $tpl->result['main'];

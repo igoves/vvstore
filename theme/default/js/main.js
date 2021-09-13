@@ -118,7 +118,7 @@ var search_ajax = function() {
     }).done(function(responseText) {
         $('#suggestions').empty();
         $('#mc').html(responseText);
-        window.history.pushState('', 'Поиск по сайту', FL+"/?do=search&story="+encodeURI(search_phrase));
+        window.history.pushState('', 'Site search', FL+"/?do=search&story="+encodeURI(search_phrase));
         window.addEventListener('popstate', function(e){
             document.location.href = document.referrer;
         }, false);

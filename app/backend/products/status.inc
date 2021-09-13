@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 $id = (int)($_GET['id']);
 
@@ -14,15 +16,14 @@ $row = $db->super_query("
 
 if ($row) {
 
-    if ($row['status'] == 1) {
+    if ((int)$row['status'] === 1) {
         $row['status'] = 0;
-    } elseif ($row['status'] == 0) {
+    } elseif ((int)$row['status'] === 0) {
         $row['status'] = 1;
     }
 
-    $db->query("
-        UPDATE '" . PREFIX . "_products' SET status='{$row['status']}' WHERE id = $id
-    ");
+    $db->query(" UPDATE '" . PREFIX . "_products' SET status='{$row['status']}' WHERE id = $id");
 
-    msg('info', $lang['message'], $lang['status_changed'] . '  <a class="btn btn-default" href="' . $_SERVER['HTTP_REFERER'] . '">' . $lang['go_to_list'] . '</a>');
+    Helper::msg('info', $lang['message'],
+        $lang['status_changed'] . '  <a class="btn btn-default" href="' . $_SERVER['HTTP_REFERER'] . '">' . $lang['go_to_list'] . '</a>');
 }

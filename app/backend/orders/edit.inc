@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 if (isset($_POST['edit'])) {
 
@@ -55,7 +57,8 @@ $row = $db->super_query("
         SELECT * FROM '" . PREFIX . "_orders' WHERE id = $id
     ");
 if (!$row['id']) {
-    msg('info', $lang['message'], $lang['order_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '/orders">' . $lang['go_to_list'] . '</a>');
+    msg('info', $lang['message'],
+        $lang['order_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '/orders">' . $lang['go_to_list'] . '</a>');
 }
 
 
@@ -72,6 +75,6 @@ $tpl->set('{delivery}', stripslashes($row['delivery'] . ' ' . $row['otd']));
 $tpl->set('{payment}', stripslashes($row['payment']));
 $tpl->set('{city}', stripslashes($row['city']));
 $tpl->set('{id}', $row['id']);
-$tpl->set('{val}', $config['val']);
+$tpl->set('{cur}', $config['cur']);
 $tpl->compile('content');
 $tpl->clear();

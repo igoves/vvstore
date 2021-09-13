@@ -8,311 +8,6 @@ if (!defined('XFOR')) {
     die('Hacking attempt!');
 }
 
-function showRow($title = '', $field = '')
-{
-    return '
-    <div class="form-group">
-        <label class="col-md-3 control-label">' . $title . '</label>
-        ' . $field . '
-    </div>
-    ';
-}
-
-function makeDropDown($options, $name, $selected)
-{
-    $output = "<select class='form-control' name='$name'>\r\n";
-    foreach ($options as $value => $description) {
-        $output .= "<option value='$value'";
-        if ($selected == $value) {
-            $output .= ' selected ';
-        }
-        $output .= ">$description</option>\n";
-    }
-    $output .= "</select>";
-    return $output;
-}
-
-
-$main_settings = showRow($lang['name_site'], '
-<div class="col-md-9">
-    <input class="form-control" type=text name="save_con[home_title]" value="' . $config['home_title'] . '" />
-</div>
-');
-
-$main_settings .= showRow($lang['desc_site'], "
-<div class='col-md-9'>
-    <textarea class='form-control' row=2 name='save_con[description]'>{$config['description']}</textarea>
-</div>
-");
-
-$main_settings .= showRow($lang['key_words'], "
-<div class='col-md-9'>
-    <textarea class='form-control' row=2 name='save_con[keywords]'>{$config['keywords']}</textarea>
-</div>
-");
-
-
-$main_settings .= showRow($lang['domen'], "
-<div class='col-md-3'>
-    <input class='form-control' type=text name='save_con[domen]' value='{$config['domen']}' />
-</div>
-");
-
-$main_settings .= showRow($lang['start_bread'], "
-<div class='col-md-3'>
-    <input class='form-control' type=text name='save_con[short_title]' value='{$config['short_title']}' />
-</div>
-");
-
-$main_settings .= showRow($lang['curr'], "
-<div class='col-md-2'>
-    <input class='form-control' type=text name='save_con[val]' value='{$config['val']}' />
-</div>
-<div class='col-md-2'>
-    <input class='form-control' type=text name='save_con[ratio]' value='{$config['ratio']}' />
-</div>	
-<div class='col-md-2'>
-    <p class='help-block'>{$lang['koef']}</p>
-</div>
-");
-
-
-$main_settings .= showRow($lang['timezone'], "
-<div class='col-md-2'>
-    <input class='form-control' type=text name='save_con[timezone]' value='{$config['timezone']}' />
-</div>
-<div class='col-md-6'>
-    <p class='help-block'>{$lang['timezone_desc']}</p>
-</div>	
-");
-
-$main_settings .= showRow($lang['debug'], "
-<div class='col-md-1'>
-    <input class='form-control' type=text name='save_con[debug]' value='{$config['debug']}'  />
-</div>
-");
-
-$main_settings .= showRow($lang['lang'], "
-<div class='col-md-1'>
-    <input class='form-control' type=text name='save_con[lang]' value='{$config['lang']}'  />
-</div>
-");
-
-$contacts_info = showRow($lang['email'], "
-<div class='col-md-4'>
-    <input class='form-control' type=text name='save_con[email]' value='{$config['email']}' />
-</div>
-<div class='col-md-5'>
-    <p class='help-block'>{$lang['email_desc']}</p>
-</div>
-");
-
-$contacts_info .= showRow($lang['tel'], "
-<div class='col-md-4'>
-    <input class='form-control' type=text name='save_con[tel]' value='{$config['tel']}' />
-</div>
-<div class='col-md-5'>
-    <p class='help-block'>{$lang['tel_desc']}</p>
-</div>
-");
-
-$contacts_info .= showRow($lang['adr'], "
-<div class='col-md-4'>
-    <input class='form-control' type=text name='save_con[address]' value='{$config['address']}' />
-</div>
-<div class='col-md-5'>
-    <p class='help-block'>{$lang['adr_desc']}</p>
-</div>
-");
-
-
-$items_per_page = showRow($lang['goods_on_page'], "
-<div class='col-md-1'>
-    <input class='form-control' type=text name='save_con[products_number]' value='{$config['products_number']}' />
-</div>
-<label class='col-md-2 control-label'>{$lang['goods_new']}</label>
-<div class='col-md-1'>
-    <input class='form-control' type=text name='save_con[random_number]' value='{$config['random_number']}' />	
-</div>
-<label class='col-md-2 control-label'>{$lang['goods_viewed']}</label>
-<div class='col-md-1'>
-    <input class='form-control' type=text name='save_con[viewed_number]' value='{$config['viewed_number']}' />	
-</div>
-");
-
-
-// $items_per_page .= showRow( 'Товаров на главной', "
-// <div class='col-md-1'>
-// <input class='form-control' type=text name='save_con[block_random_products]' value='{$config['block_random_products']}' />
-// </div>
-// " );
-
-
-// $items_per_page .= showRow( 'Недавно смотрели', "
-// <div class='col-md-1'>
-// <input class='form-control' type=text name='save_con[viewed_products]' value='{$config['viewed_products']}' />
-// </div>
-// " );
-
-
-$images = showRow($lang['for_goods'], "
-<div class='col-md-3'>
-    <div class='input-group'>
-        <input class='form-control' type=text name='save_con[good_pic_s]' value='{$config['good_pic_s']}' />
-        <span class='input-group-addon'>{$lang['small']}</span>
-    </div>
-</div>
-
-<div class='col-md-3'>
-    <div class='input-group'>
-        <input class='form-control' type=text name='save_con[good_pic_m]' value='{$config['good_pic_m']}' />
-        <span class='input-group-addon'>{$lang['middle']}</span>
-    </div>
-</div>
-
-<div class='col-md-3'>
-    <div class='input-group'>
-        <input class='form-control' type=text name='save_con[good_pic_b]' value='{$config['good_pic_b']}' />
-        <span class='input-group-addon'>{$lang['big']}</span>
-    </div>
-</div>
-");
-
-
-$addition = showRow($lang['text_on_main'], "
-<div class='col-md-2'>
-    <input class='form-control' type=text name='save_con[id_main_page]' value='{$config['id_main_page']}' />
-</div>
-");
-
-$addition .= showRow($lang['delivery_method'], "
-<div class='col-md-9'>
-    <textarea class='form-control' name='save_con[delivery_method]' row=2>{$config['delivery_method']}</textarea>
-</div>
-");
-
-$addition .= showRow($lang['payment_method'], "
-<div class='col-md-9'>
-    <textarea class='form-control' name='save_con[payment_method]' row=2>{$config['payment_method']}</textarea>
-</div>
-");
-
-
-
-
-$paypal = showRow($lang['live_account'], "
-<div class='col-md-3' >
-    <input class='form-control' type=text name='save_con[live_account]' value='{$config['live_account']}' />
-</div>
-<div class='col-md-6'>
-    <small>{$lang['paypal_text_1']}</small>
-</div>
-");
-
-$paypal .= showRow($lang['sandbox_account'], "
-<div class='col-md-3' >
-    <input class='form-control' type=text name='save_con[sandbox_account]' value='{$config['sandbox_account']}' />
-</div>
-<div class='col-md-6'>
-    <small>{$lang['paypal_text_2']}</small>
-</div>
-");
-
-$paypal .= showRow($lang['sandbox_mode'], "
-<div class='col-md-1' >
-    <input class='form-control' type=number name='save_con[sandbox_mode]' value='{$config['sandbox_mode']}' />
-</div>
-<div class='col-md-2'></div>
-<div class='col-md-4'>
-    {$lang['paypal_text_3']}
-</div>
-");
-
-$paypal .= showRow($lang['pp_currency'], "
-<div class='col-md-2' >
-    <input class='form-control' type=text name='save_con[pp_currency]' value='{$config['pp_currency']}' />
-</div>
-<div class='col-md-1'></div>
-<div class='col-md-6'>
-    {$lang['paypal_text_6']}
-</div>
-");
-
-$paypal .= showRow($lang['cancel_url'], "
-<div class='col-md-6' >
-    <input class='form-control' type=url name='save_con[cancel_url]' value='{$config['cancel_url']}' />
-</div>
-<div class='col-md-3'>
-    <small>{$lang['paypal_text_4']}</small>
-</div>
-");
-
-$paypal .= showRow($lang['return_url'], "
-<div class='col-md-6' >
-    <input class='form-control' type=url name='save_con[return_url]' value='{$config['return_url']}' />
-</div>
-<div class='col-md-3'>
-    <small>{$lang['paypal_text_5']}</small>
-</div>
-");
-
-
-
-$admin = showRow($lang['pass'], "
-<div class='col-md-3' >
-    <input class='form-control' type=password name='save_con[pass]' value='' />
-</div>
-");
-
-$admin .= showRow($lang['count_on_page'], "
-<div class='col-md-2' >
-    <div class='input-group'>
-    <span class='input-group-addon'>{$lang['goods']}</span>
-    <input class='form-control' type=text name='save_con[a_count_products]' value='{$config['a_count_products']}' />
-    </div>
-</div>
-
-
-");
-
-$admin .= showRow('', "
-<div class='col-md-2' >
-    <div class='input-group'>
-    <span class='input-group-addon'>{$lang['pages']}</span>
-    <input class='form-control' type=text name='save_con[a_count_pages]' value='{$config['a_count_pages']}' />
-    </div>
-</div>
-
-<div class='col-md-2' >
-    <div class='input-group'>
-    <span class='input-group-addon'>{$lang['orders']}</span>
-    <input class='form-control' type=text name='save_con[a_count_orders]' value='{$config['a_count_orders']}' />
-    </div>
-</div>
-
-");
-
-
-$admin .= showRow($lang['mask_phone'], "
-<div class='col-md-3' >
-    <input class='form-control' type=text name='save_con[mask_phone]' value='{$config['mask_phone']}' />
-</div>
-");
-
-
-$tpl->load_template('settings.tpl');
-$tpl->set('{main_settings}', $main_settings);
-$tpl->set('{contacts_info}', $contacts_info);
-$tpl->set('{items_per_page}', $items_per_page);
-$tpl->set('{images}', $images);
-// $tpl->set( "{functional}", $functional );
-$tpl->set('{addition}', $addition);
-$tpl->set('{paypal}', $paypal);
-$tpl->set('{admin}', $admin);
-$tpl->compile('content');
-$tpl->clear();
-
-
 if (isset($_POST['save'])) {
 
     $save_con = $_POST['save_con'];
@@ -337,5 +32,101 @@ if (isset($_POST['save'])) {
         ");
     }
 
-    msg('info', $lang['message'], $lang['setting_saved'] . ' <a class="btn btn-default" href="/' . AL . '/settings">' . $lang['go_to_list'] . '</a>');
+    Helper::msg('info', $lang['message'],
+        $lang['setting_saved'] . ' <a class="btn btn-default" href="/' . AL . '/settings">' . $lang['go_to_list'] . '</a>');
 }
+
+$tpl->load_template('settings.tpl');
+
+$tpl->set('{name_site}', $lang['name_site']);
+$tpl->set('{home_title}', $config['home_title']);
+$tpl->set('{desc_site}', $lang['desc_site']);
+$tpl->set('{description}', $config['description']);
+$tpl->set('{key_words}', $lang['key_words']);
+$tpl->set('{keywords}', $config['keywords']);
+$tpl->set('{text_domain}', $lang['domain']);
+$tpl->set('{domain}', $config['domain']);
+$tpl->set('{start_bread}', $lang['start_bread']);
+$tpl->set('{short_title}', $config['short_title']);
+$tpl->set('{text_cur}', $lang['curr']);
+$tpl->set('{cur}', $config['cur']);
+$tpl->set('{ratio}', $config['ratio']);
+$tpl->set('{koef}', $lang['koef']);
+$tpl->set('{text_timezone}', $lang['timezone']);
+$tpl->set('{timezone}', $config['timezone']);
+$tpl->set('{timezone_desc}', $lang['timezone_desc']);
+$tpl->set('{text_debug}', $lang['debug']);
+$tpl->set('{debug}', $config['debug']);
+$tpl->set('{text_lang}', $lang['lang']);
+$tpl->set('{lang}', $config['lang']);
+
+$tpl->set('{text_email}', $lang['email']);
+$tpl->set('{email_desc}', $lang['email_desc']);
+$tpl->set('{email}', $config['email']);
+
+$tpl->set('{text_tel}', $lang['tel']);
+$tpl->set('{tel_desc}', $lang['tel_desc']);
+$tpl->set('{tel}', $config['tel']);
+
+$tpl->set('{text_adr}', $lang['adr']);
+$tpl->set('{adr_desc}', $lang['adr_desc']);
+$tpl->set('{address}', $config['address']);
+
+$tpl->set('{goods_on_page}', $lang['goods_on_page']);
+$tpl->set('{goods_new}', $lang['goods_new']);
+$tpl->set('{goods_viewed}', $lang['goods_viewed']);
+$tpl->set('{products_number}', $config['products_number']);
+$tpl->set('{random_number}', $config['random_number']);
+$tpl->set('{viewed_number}', $config['viewed_number']);
+
+$tpl->set('{for_goods}', $lang['for_goods']);
+$tpl->set('{text_small}', $lang['small']);
+$tpl->set('{text_middle}', $lang['middle']);
+$tpl->set('{text_big}', $lang['big']);
+$tpl->set('{good_pic_s}', $config['good_pic_s']);
+$tpl->set('{good_pic_m}', $config['good_pic_m']);
+$tpl->set('{good_pic_b}', $config['good_pic_b']);
+
+$tpl->set('{text_on_main}', $lang['text_on_main']);
+$tpl->set('{text_delivery_method}', $lang['delivery_method']);
+$tpl->set('{text_payment_method}', $lang['payment_method']);
+$tpl->set('{id_main_page}', $config['id_main_page']);
+$tpl->set('{delivery_method}', $config['delivery_method']);
+$tpl->set('{payment_method}', $config['payment_method']);
+
+
+$tpl->set('{text_live_account}', $lang['live_account']);
+$tpl->set('{text_sandbox_account}', $lang['sandbox_account']);
+$tpl->set('{text_sandbox_mode}', $lang['sandbox_mode']);
+$tpl->set('{text_pp_currency}', $lang['pp_currency']);
+$tpl->set('{text_cancel_url}', $lang['cancel_url']);
+$tpl->set('{text_return_url}', $lang['return_url']);
+$tpl->set('{live_account}', $config['live_account']);
+$tpl->set('{sandbox_account}', $config['sandbox_account']);
+$tpl->set('{sandbox_mode}', $config['sandbox_mode']);
+$tpl->set('{pp_currency}', $config['pp_currency']);
+$tpl->set('{cancel_url}', $config['cancel_url']);
+$tpl->set('{return_url}', $config['return_url']);
+$tpl->set('{paypal_text_1}', $lang['paypal_text_1']);
+$tpl->set('{paypal_text_2}', $lang['paypal_text_2']);
+$tpl->set('{paypal_text_3}', $lang['paypal_text_3']);
+$tpl->set('{paypal_text_4}', $lang['paypal_text_4']);
+$tpl->set('{paypal_text_5}', $lang['paypal_text_5']);
+$tpl->set('{paypal_text_6}', $lang['paypal_text_6']);
+
+$tpl->set('{text_pass}', $lang['pass']);
+$tpl->set('{count_on_page}', $lang['count_on_page']);
+$tpl->set('{text_goods}', $lang['goods']);
+$tpl->set('{text_pages}', $lang['pages']);
+$tpl->set('{text_orders}', $lang['orders']);
+$tpl->set('{a_count_products}', $config['a_count_products']);
+$tpl->set('{a_count_pages}', $config['a_count_pages']);
+$tpl->set('{a_count_orders}', $config['a_count_orders']);
+
+$tpl->set('{text_mask_phone}', $lang['mask_phone']);
+$tpl->set('{mask_phone}', $config['mask_phone']);
+
+$tpl->compile('content');
+$tpl->clear();
+
+

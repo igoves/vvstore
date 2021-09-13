@@ -1,4 +1,4 @@
-<h3 style="margin-top:0">Страница
+<h3 style="margin-top:0">Page
     <div class="pull-right">
         <a href="/{AL}/pages" class="btn btn-default">
             <span class="glyphicon glyphicon-list"></span>
@@ -11,12 +11,12 @@
     <div class="form-group">
         <div class="col-md-9">
             <div class="input-group">
-                <input type="text" class="form-control" name="name" value="{name}" placeholder="Название"
+                <input type="text" class="form-control" name="name" value="{name}" placeholder="Title"
                        required/>
                 <span class="input-group-btn">
-                    <button id="show-tpl" class="btn btn-default" type="button">ШАБЛОН</button><button id="show-url"
+                    <button id="show-tpl" class="btn btn-default" type="button">TEMPLATE</button><button id="show-url"
                                                                                                        class="btn btn-default"
-                                                                                                       type="button">ЧПУ</button><button
+                                                                                                       type="button">URL</button><button
                             id="show-meta" class="btn btn-default" type="button">META</button>
                 </span>
             </div>
@@ -25,7 +25,7 @@
 
     <div class="form-group" id="tpl" style="display:none">
         <div class="col-md-3 text-right text-muted" style="line-height:32px">
-            Шаблон
+            Template
         </div>
         <div class="col-md-6">
             <div class="input-group">
@@ -37,7 +37,7 @@
 
     <div class="form-group" id="url" style="display:none">
         <div class="col-md-3 text-right text-muted" style="line-height:32px">
-            ЧПУ
+            URL
         </div>
         <div class="col-md-6">
             <div class="input-group">
@@ -50,7 +50,7 @@
     <div class="" id="meta" style="display:none">
         <div class="form-group">
             <div class="col-md-3 text-right text-muted" style="line-height:32px">
-                Мета TITLE
+                Meta TITLE
             </div>
             <div class="col-md-8">
                 <input type="text" class="form-control" name="meta_title" value="{meta_title}"/>
@@ -58,7 +58,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-3 text-right text-muted" style="line-height:32px">
-                Мета DESCRIPTION
+                Meta DESCRIPTION
             </div>
             <div class="col-md-8">
                 <input type="text" class="form-control" name="meta_desc" value="{meta_desc}"/>
@@ -66,7 +66,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-3 text-right text-muted" style="line-height:32px">
-                Мета KEYWORDS
+                Meta KEYWORDS
             </div>
             <div class="col-md-8">
                 <textarea rows="3" class="form-control" name="meta_key">{meta_key}</textarea>
@@ -81,8 +81,8 @@
     </div>
 
     [act_add]
-    <button type="submit" name="add" class="btn btn-lg btn-block btn-success" data-loading-text="Добавляется...">
-        Добавить
+    <button type="submit" name="add" class="btn btn-lg btn-block btn-success" data-loading-text="Adding...">
+        Add
     </button>
     [/act_add]
 
@@ -90,8 +90,8 @@
     <input type="hidden" name="id" value="{id}"/>
     <div class="row">
         <div class="col-md-11">
-            <input type="submit" name="edit" class="btn btn-lg btn-block btn-success" data-loading-text="Сохраняется..."
-                   value="Сохранить"/>
+            <input type="submit" name="edit" class="btn btn-lg btn-block btn-success" data-loading-text="Saving..."
+                   value="Save"/>
         </div>
         <div class="col-md-1">
             <a href="/{AL}/pages/del/{id}" class="btn btn-danger btn-sm pull-right">

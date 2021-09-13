@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 if (isset($_POST['edit'])) {
 
@@ -15,17 +17,21 @@ if (isset($_POST['edit'])) {
     $parent = (int)$_POST['cat'];
     $status = isset($_POST['status']) ? 1 : 0;
 
-    if (trim($alt_name) == "" or !$alt_name)
-        $alt_name = totranslit(stripslashes($name), true, false);
-    else
-        $alt_name = totranslit(stripslashes($alt_name), true, false);
+    if (trim($alt_name) == "" or !$alt_name) {
+        $alt_name = Helper::totranslit(stripslashes($name), true, false);
+    } else {
+        $alt_name = Helper::totranslit(stripslashes($alt_name), true, false);
+    }
 
     $row = $db->super_query("SELECT * FROM '" . PREFIX . "_categories' WHERE id = $id");
     if ($row['id']) {
-        if ($id == $parent) $parent = $row['parent'];
+        if ($id == $parent) {
+            $parent = $row['parent'];
+        }
         $real_alt = $row['alt'];
     } else {
-        msg("info", $lang['message'], $lang['no_such_cat'] . ' <a class="btn btn-default" href="/' . AL . '/categories">' . $lang['go_to_list'] . '</a>');
+        Helper::msg("info", $lang['message'],
+            $lang['no_such_cat'] . ' <a class="btn btn-default" href="/' . AL . '/categories">' . $lang['go_to_list'] . '</a>');
     }
 
     $a = 0;
@@ -40,7 +46,9 @@ if (isset($_POST['edit'])) {
         }
     }
 
-    if ($a != 1) $alt = $alt_name . '_' . random(2);
+    if ($a != 1) {
+        $alt = $alt_name . '_' . random(2);
+    }
 
     if (!empty($_POST['meta_title']) || !empty($_POST['meta_desc']) || !empty($_POST['meta_key'])) {
         if (!empty($_POST['meta_title'])) {
@@ -55,7 +63,7 @@ if (isset($_POST['edit'])) {
             $metatags['keywords'] = $db->safesql($_POST['meta_key']);
         }
     } else {
-        $metatags = create_metatags($name . ' ' . $desc);
+        $metatags = Helper::create_metatags($name . ' ' . $desc);
     }
 
     $db->query("
@@ -71,7 +79,7 @@ if (isset($_POST['edit'])) {
         WHERE id = $id
     ");
 
-    msg('info', $lang['message'], '
+    Helper::msg('info', $lang['message'], '
         ' . $lang['cat_edited'] . ' 
             <a class="btn btn-default" href="/' . AL . '/categories/add">
                 <span class="glyphicon glyphicon-plus"></span> 
@@ -90,7 +98,6 @@ if (isset($_POST['edit'])) {
             </a>
     ');
 
-
 }
 
 
@@ -98,9 +105,9 @@ $id = (int)$_GET['id'];
 
 $row = $db->super_query("SELECT * FROM '" . PREFIX . "_categories' WHERE id = '$id'");
 
-
 if (!$row['id']) {
-    msg('info', $lang['message'], $lang['no_such_cat'] . ' <a class="btn btn-default" href="/' . AL . '/categories">' . $lang['go_to_list'] . '</a>');
+    Helper::msg('info', $lang['message'],
+        $lang['no_such_cat'] . ' <a class="btn btn-default" href="/' . AL . '/categories">' . $lang['go_to_list'] . '</a>');
 }
 
 $tpl->load_template('categories/edit.tpl');
@@ -111,7 +118,7 @@ $tpl->set('{id}', $row['id']);
 $tpl->set('{name}', htmlspecialchars($row['name']));
 $tpl->set('{alt}', $row['alt']);
 $row['status'] == 1 ? $status = ' checked' : $status = '';
-$tpl->set('{catlist}', CategorySelection($id, 0));
+$tpl->set('{catlist}', Helper::CategorySelection($id, 0));
 $tpl->set('{desc}', stripslashes($row['desc']));
 $tpl->set('{status}', $status);
 $tpl->set('{AL}', AL);

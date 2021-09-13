@@ -1,16 +1,16 @@
-{fio}, благодарим,  что  воспользовались  услугами  нашего  интернет-магазина.<br/><br/>
+{fio}, thank you for using the services of our online store.<br/><br/>
 
-Вы указали следующие контактные данные:<br/>
-[tel]Номер телефона: {tel}<br/>[/tel]
-[city]Город: {city}<br/>[/city]
-[email]Email адрес: {email}<br/>[/email]
+You have provided the following contact details:<br/>
+[tel]Phone: {tel}<br/>[/tel]
+[city]City: {city}<br/>[/city]
+[email]Email: {email}<br/>[/email]
 <br/>
-[delivery]Доставка: {delivery}<br/>[/delivery]
+[delivery]Delivery: {delivery}<br/>[/delivery]
 [otd]{otd}<br/>[/otd]
-[payment]Оплата: {payment}<br/>[/payment]
+[payment]Payment: {payment}<br/>[/payment]
 <br/>
-Ваш заказ № {num_zakaz}<br/>
+Order № {num_zakaz}<br/>
 {order_table}<br/>
-<b>Статус заказа: </b> {status}<br/><br/>
+<b>Status: </b> {status}<br/><br/>
 
-Наши  менеджеры  свяжутся  с  Вами  для  уточнения  деталей  заказа и согласования  времени  доставки.
+Our managers will contact you to clarify the details of the order and agree on the delivery time.

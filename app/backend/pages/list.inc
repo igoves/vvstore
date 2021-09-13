@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 $total_pages = $db->super_query("SELECT COUNT(*) as num FROM '" . PREFIX . "_pages'");
 
@@ -39,13 +41,18 @@ while ($row = $db->get_row($sql)) {
             {$row['alt']}.html
         </td>
         <td align=center>
+            <a class='btn btn-warning btn-sm' href='/{AL}/pages/edit/{$row['id']}'>
+                <span class='glyphicon glyphicon-pencil'></span>
+            </a>
+        </td>
+        <td align=center>
             <a rel='noajax' class='btn btn-default btn-sm' href='" . FL . "/{$row['alt']}.html' target='_blank' title='{$lang['link']}'>
                 <span class='glyphicon glyphicon-share-alt'></span>
             </a>
         </td>
         <td align=center>
             <a class='btn btn-danger btn-sm' href='/{AL}/pages/del/{$row['id']}'>
-                <span class='glyphicon glyphicon-remove'></span>
+                <span class='glyphicon glyphicon-trash'></span>
             </a>
         </td>
     </tr>";

@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 $limit = $config['products_number'];
 
@@ -14,11 +16,13 @@ if ($cstart) {
 }
 $i = $cstart;
 
-$tpl->load_template('product.short.tile.tpl');
+$tpl->load_template('product/tile.tpl');
 
-if (!isset($category_id)) include APP_DIR . '/404.php';
+if (!isset($category_id)) {
+    include APP_DIR . '/404.php';
+}
 
-$url_page = '/' . get_url($category_id);
+$url_page = '/' . Helper::getUrl($category_id);
 
 $cat_title = $cat[$category_id]['name'];
 $cat_desc = '';
@@ -34,32 +38,23 @@ $metatags['description'] = $shop_cat[$category_id]['meta_desc'];
 $metatags['keywords'] = $shop_cat[$category_id]['meta_key'];
 
 $sql_count = "
-    SELECT
-        COUNT(DISTINCT id) as count
-    FROM
-        '" . PREFIX . "_products'
-    WHERE
-        `status`=1
-        AND cat_id IN ($get_cats)
+    SELECT COUNT(DISTINCT id) as count
+    FROM '" . PREFIX . "_products'
+    WHERE `status`=1 AND cat_id IN ($get_cats)
 ";
 $count_all = $db->super_query($sql_count);
 $count_all = $count_all['count'];
 
 if ($count_all != 0 && !isset($not_found_filter)) {
     $sql_select = "
-        SELECT
-            *
-        FROM
-            '" . PREFIX . "_products'
-        WHERE
-            `status`=1
-            AND cat_id IN ($get_cats)
-        ORDER BY
-            date_added DESC
+        SELECT *
+        FROM '" . PREFIX . "_products'
+        WHERE `status`=1 AND cat_id IN ($get_cats)
+        ORDER BY date_added DESC
         LIMIT $cstart, $limit
     ";
     $sql_result = $db->query($sql_select);
-    $data = getProductShort($config, $db, $tpl, $sql_result, $i);
+    $data = Helper::getProductShort($config, $db, $tpl, $sql_result, $i);
     $tpl->result['goods'] = $data['goods'];
     $i = $data['i'];
 } else {
@@ -85,7 +80,7 @@ $pagination = navi::show([
     'template' => 'nav.tpl',
 ]);
 
-$tpl->load_template('product.catalog.tpl');
+$tpl->load_template('product/catalog.tpl');
 $tpl->set('{title}', $cat_title);
 $tpl->set('{desc}', $cat_desc);
 $tpl->set('{goods}', $tpl->result['goods']);

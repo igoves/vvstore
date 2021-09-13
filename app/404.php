@@ -40,8 +40,8 @@ if (!empty($_SESSION['cart'])) {
 $tpl->set('{total_qty}', $total_qty);
 $tpl->set('{total_cost}', $total_cost);
 $tpl->set('{Y}', date('Y'));
-$tpl->set('{val}', $config['val']);
-$tpl->set('{domen}', $config['domen']);
+$tpl->set('{cur}', $config['cur']);
+$tpl->set('{domain}', $config['domain']);
 $tpl->set('{FL}', FL);
 if (!empty($config['tel'])) {
     $tel_array = explode(',', $config['tel']);
@@ -56,18 +56,10 @@ $tpl->set('{content}', $tpl->result['404']);
 
 if (isset($_SERVER['HTTP_X_PJAX'])) {
     echo $metatags;
-    if ($config['debug'] === 0) {
-        echo $tpl->result['content'];
-    } else {
-        echo htmlCompress($tpl->result['content']);
-    }
+    echo (int)$config['debug'] === 0 ? Helper::htmlCompress($tpl->result['content']) : $tpl->result['content'];
     die();
 }
 
 $tpl->compile('main');
-if ($config['debug'] === 0) {
-    echo $tpl->result['main'];
-} else {
-    echo htmlCompress($tpl->result['main']);
-}
-die();
+
+echo (int)$config['debug'] === 0 ? Helper::htmlCompress($tpl->result['main']) : $tpl->result['main'];

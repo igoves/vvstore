@@ -8,7 +8,7 @@ if (!defined('XFOR')) {
     die('Hacking attempt!');
 }
 
-$cart = isset($_SESSION['cart']) && !empty($_SESSION['cart']) ? $_SESSION['cart'] : array();
+$cart = isset($_SESSION['cart']) && !empty($_SESSION['cart']) ? $_SESSION['cart'] : [];
 
 if (!isset($_POST['send'])) {
 
@@ -27,12 +27,12 @@ if (!isset($_POST['send'])) {
 
         foreach ($cart as $id => $value) {
             $total_cost += $value['cost'] * $cart[$id]['qty'];
-            $tpl->load_template('checkout.cart.tpl');
+            $tpl->load_template('cart.checkout.tpl');
             $tpl->set('{product_id}', $id);
             $tpl->set('{product_alt}', $value['alt']);
             $tpl->set('{product_name}', $value['name']);
             $tpl->set('{cost}', $value['cost']);
-            $tpl->set('{val}', $config['val']);
+            $tpl->set('{cur}', $config['cur']);
             $tpl->set('{product_img}', $value['img']);
             $tpl->set('{qty}', $cart[$id]['qty']);
             $tpl->set('{price}', $value['cost'] * $cart[$id]['qty']);
@@ -49,7 +49,7 @@ if (!isset($_POST['send'])) {
     $tpl->set('{cart}', $tpl->result['cart']);
     $tpl->set('{total_cost}', $total_cost);
     $tpl->set('{mask_phone}', $config['mask_phone']);
-    $tpl->set('{val}', $config['val']);
+    $tpl->set('{cur}', $config['cur']);
     $tpl->set('{FL}', FL);
 
     $item = '';
@@ -92,25 +92,26 @@ if (!isset($_POST['send'])) {
     $total_cost = 0;
 
     $cart = array_reverse($cart, true);
+    $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://';
 
     foreach ($cart as $id => $value) {
         $i++;
         $cost = $value['cost'];
         $qty = $cart[$id]['qty'];
 
-        $img = '<img src="http://' . $config['domen'] . $value['img'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" />';
+        $img = '<img src="' . $protocol . $config['domain'] . $value['img'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" />';
         $list_mail .= '
             <tr style="border-bottom:1px solid #ccc;">
                 <td>' . $i . '</td>
                 <td>' . $img . '</td>
-                <td><a href="http://' . $config['domen'] . FL . '/' . $id . '-' . $value['alt'] . '" target="_blank" title="' . $value['name'] . '">' . $value['name'] . '</a></td>
+                <td><a href="' . $protocol . $config['domain'] . FL . '/' . $id . '-' . $value['alt'] . '" target="_blank" title="' . $value['name'] . '">' . $value['name'] . '</a></td>
                 <td>' . $qty . ' ' . $lang['pc'] . '.</td>
-                <td>' . $cost . ' ' . $config['val'] . '</td>
-                <td>' . ($cost * $qty) . ' ' . $config['val'] . '</td>
+                <td>' . $cost . ' ' . $config['cur'] . '</td>
+                <td>' . ($cost * $qty) . ' ' . $config['cur'] . '</td>
             </tr>
         ';
         $order .= '
-            ' . $i . ') <a href="' . FL . '/' . $id . '-' . $value['alt'] . '" target="_blank" title="' . $value['name'] . '">' . $value['name'] . '</a> - ' . $qty . ' ' . $lang['pc'] . ' - ' . $cost . ' ' . $config['val'] . ' - ' . ($cost * $qty) . ' ' . $config['val'] . '<br/>
+            ' . $i . ') <a href="' . FL . '/' . $id . '-' . $value['alt'] . '" target="_blank" title="' . $value['name'] . '">' . $value['name'] . '</a> - ' . $qty . ' ' . $lang['pc'] . ' - ' . $cost . ' ' . $config['cur'] . ' - ' . ($cost * $qty) . ' ' . $config['cur'] . '<br/>
         ';
 
         $total_cost += $cost * $qty;
@@ -151,7 +152,7 @@ if (!isset($_POST['send'])) {
     $tpl->set('{list}', $list_mail);
     $tpl->set('{noty}', $list_mail_noty);
     $tpl->set('{total_cost}', $total_cost);
-    $tpl->set('{val}', $config['val']);
+    $tpl->set('{cur}', $config['cur']);
     $tpl->compile('order_table');
     $tpl->clear();
     $order_table = $tpl->result['order_table'];
@@ -205,12 +206,6 @@ if (!isset($_POST['send'])) {
         } else {
             $tpl->set_block("'\\[payment\\](.*?)\\[/payment\\]'si", '');
         }
-        // if ( empty($tel) && empty($city) && empty($email) ) {
-        // $tpl->set( '[empty_contacts]', "" );
-        // $tpl->set( '[/empty_contacts]', "" );
-        // } else {
-        // $tpl->set_block( "'\\[empty_contacts\\](.*?)\\[/empty_contacts\\]'si", "" );
-        // }
         $tpl->set('{order_table}', $order_table);
         $tpl->set('{num_zakaz}', $num_zakaz);
         $tpl->compile('mail_content');
@@ -218,14 +213,14 @@ if (!isset($_POST['send'])) {
 
         $tpl->load_template('mails/mail.tpl');
         $tpl->set('{mail_content}', $tpl->result['mail_content']);
-        $tpl->set('{domen}', $config['domen']);
+        $tpl->set('{domain}', $config['domain']);
         $tpl->set('{email}', $config['email']);
         $tpl->compile('mail');
         $tpl->clear();
 
         $mail = new mail($config);
         $mail->from = $config['email'];
-        $mail->send($email, $lang['thank_for_ordering'] . ' ' . $config['domen'], $tpl->result['mail']);
+        $mail->send($email, $lang['thank_for_ordering'] . ' ' . $config['domain'], $tpl->result['mail']);
         unset($tpl->result['mail_content'], $tpl->result['mail'], $mail);
 
     }
@@ -281,7 +276,7 @@ if (!isset($_POST['send'])) {
     } else {
         $tpl->set_block("'\\[empty_contacts\\](.*?)\\[/empty_contacts\\]'si", '');
     }
-    $tpl->set('{domen}', $config['domen']);
+    $tpl->set('{domain}', $config['domain']);
     $tpl->set('{order_table}', $order_table);
     $tpl->set('{noty}', $list_mail_noty);
     $tpl->set('{num_zakaz}', $num_zakaz);
@@ -290,14 +285,14 @@ if (!isset($_POST['send'])) {
 
     $tpl->load_template('mails/mail.tpl');
     $tpl->set('{mail_content}', $tpl->result['mail_content']);
-    $tpl->set('{domen}', $config['domen']);
+    $tpl->set('{domain}', $config['domain']);
     $tpl->set('{email}', $config['email']);
     $tpl->compile('mail');
     $tpl->clear();
 
     $mail = new mail($config);
     $mail->from = $email ? $email : $config['email'];
-    $mail->send($config['email'], $lang['order'] . ' ' . $config['domen'], $tpl->result['mail']);
+    $mail->send($config['email'], $lang['order'] . ' ' . $config['domain'], $tpl->result['mail']);
     unset($tpl->result['mail_content'], $tpl->result['mail'], $mail);
     //=======
 

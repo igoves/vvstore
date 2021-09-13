@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="{lang}">
 <head>
     <meta charset="utf-8">
     {headers}
@@ -29,20 +29,20 @@
         </div>
         <div id="navbar-collapse" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{FL}/men">Мужчинам</a></li>
-                <li><a href="{FL}/women">Женщинам</a></li>
-                <li><a href="{FL}/childrens">Детям</a></li>
-                <li><a href="{FL}/contacts.html">Контакты</a></li>
+                <li><a href="{FL}/men">Men</a></li>
+                <li><a href="{FL}/women">Women</a></li>
+                <li><a href="{FL}/childrens">Childrens</a></li>
+                <li><a href="{FL}/contacts.html">Contacts</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a onclick="cart.show(event);" href="checkout">Корзина <span class="total_qty">{total_qty}</span> шт</a>
+                <li><a onclick="cart.show(event);" href="{FL}/checkout">Cart (<span class="total_qty">{total_qty}</span>)</a>
                 </li>
             </ul>
             <div class="navbar-form navbar-right" id="search">
                 <input type="hidden" name="do" value="search"/>
                 <div class="input-group">
                     <input type="text" onkeydown="lookup(this.value);" name="story" class="form-control"
-                           placeholder="Поиск">
+                           placeholder="Search">
                     <span class="input-group-btn">
                         <button type="button" onclick="search_ajax(event);" class="btn btn-default">
                             <span class="glyphicon glyphicon-search"></span>
@@ -64,20 +64,20 @@
         <hr>
         <div class="row">
             <div class="col-sm-3">
-                <p>Самый быстрый и простой скрипт интернет-витрины</p>
+                <p>The fastest and easiest internet showcase script</p>
             </div>
             <div class="col-sm-3">
                 <ul class="list-unstyled">
-                    <li><a href="{FL}/dostavka.html">Доставка</a></li>
-                    <li><a href="{FL}/oplata.html">Оплата</a></li>
-                    <li><a href="{FL}/garantii.html">Гарантии</a></li>
+                    <li><a href="{FL}/dostavka.html">Delivery</a></li>
+                    <li><a href="{FL}/oplata.html">Payment</a></li>
+                    <li><a href="{FL}/garantii.html">Guarantees</a></li>
                 </ul>
             </div>
             <div class="col-sm-3">
                 <ul class="list-unstyled">
-                    <li><a href="{FL}/about.html">О нас</a></li>
-                    <li><a href="{FL}/faq.html">Вопросы</a></li>
-                    <li><a href="{FL}/contacts.html">Контакты</a></li>
+                    <li><a href="{FL}/about.html">About</a></li>
+                    <li><a href="{FL}/faq.html">FAQ</a></li>
+                    <li><a href="{FL}/contacts.html">Contacts</a></li>
                 </ul>
             </div>
             <div class="col-sm-3">
@@ -90,7 +90,7 @@
             </div>
         </div>
         <hr/>
-        <p class="text-center text-muted">{domen} &COPY; {Y}</p>
+        <p class="text-center text-muted">{domain} &COPY; {Y}</p>
     </div>
 </footer>
 

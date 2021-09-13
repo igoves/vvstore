@@ -1,4 +1,4 @@
-<h3 style="margin-top:0">Категория
+<h3 style="margin-top:0">Category
 	<div class="pull-right">
 		<a href="/{AL}/categories" class="btn btn-default">
 			<span class="glyphicon glyphicon-list-alt"></span>
@@ -11,7 +11,7 @@
 	<div class="form-group">
 		<div class="col-md-9">
 			<div class="input-group">
-				<input type="text" class="form-control" name="name" value="{name}" placeholder="Название" required/>
+				<input type="text" class="form-control" name="name" value="{name}" placeholder="Title" required/>
 				<span class="input-group-btn">
 					<button id="show-url" class="btn btn-default" type="button">ЧПУ</button><button id="show-meta" class="btn btn-default" type="button">META</button>
 				</span>
@@ -19,14 +19,14 @@
 		</div>
 		<div class="col-md-2" style="line-height:32px;">
 			<label style="font-weight:normal;">
-				<input name="status" type="checkbox" {status} /> АКТИВЕН
+				<input name="status" type="checkbox" {status} /> ACTIVE
 			</label>
 		</div>
 	</div>
 
 	<div class="form-group" id="url" style="display:none">
 		<div class="col-md-3 text-right text-muted" style="line-height:32px">
-			ЧПУ
+			URL
 		</div>
 		<div class="col-md-6">
 			<input type="text" class="form-control" name="alt" value="{alt}" />
@@ -36,7 +36,7 @@
 	<div id="meta" style="display:none">
 		<div class="form-group">
 			<div class="col-md-3 text-right text-muted" style="line-height:32px">
-				Мета TITLE
+				Meta TITLE
 			</div>
 			<div class="col-md-8">
 				<input type="text" class="form-control" name="meta_title" value="{meta_title}" />
@@ -44,7 +44,7 @@
 		</div>
 		<div class="form-group">
 			<div class="col-md-3 text-right text-muted" style="line-height:32px">
-				Мета DESCRIPTION
+				Meta DESCRIPTION
 			</div>
 			<div class="col-md-8">
 				<input type="text" class="form-control" name="meta_desc" value="{meta_desc}" />
@@ -52,7 +52,7 @@
 		</div>
 		<div class="form-group">
 			<div class="col-md-3 text-right text-muted" style="line-height:32px">
-				Мета KEYWORDS
+				Meta KEYWORDS
 			</div>
 			<div class="col-md-8">
 				<textarea rows="3" class="form-control" name="meta_key">{meta_key}</textarea>
@@ -62,7 +62,7 @@
 
 	<div class="form-group row">
 		<div class="col-md-9">
-			<select data-placeholder="Категория" class="form-control cat_list" name="cat">
+			<select data-placeholder="Category" class="form-control cat_list" name="cat">
 				{catlist}
 			</select>
 		</div>
@@ -70,13 +70,13 @@
 
 	<div class="form-group">
 		<div class="col-md-12">
-			<textarea class="editor" rows="13" name="desc" placeholder="Описание">{desc}</textarea>
+			<textarea class="editor" rows="13" name="desc" placeholder="Description">{desc}</textarea>
 		</div>
 	</div>
 
 	[act_add]
-	<button type="submit" name="add" class="btn btn-lg btn-block btn-success" data-loading-text="Добавляется...">
-		Добавить
+	<button type="submit" name="add" class="btn btn-lg btn-block btn-success" data-loading-text="Adding...">
+		Add
 	</button>
 	[/act_add]
 
@@ -85,8 +85,8 @@
 	<input type="hidden" name="img" value="{photoi}" />
 	<div class="row">
 		<div class="col-md-11">
-			<button type="submit" name="edit" class="btn btn-success btn-block btn-lg" data-loading-text="Сохраняется...">
-				Сохранить
+			<button type="submit" name="edit" class="btn btn-success btn-block btn-lg" data-loading-text="Saving...">
+				Save
 			</button>
 		</div>
 		<div class="col-md-1">

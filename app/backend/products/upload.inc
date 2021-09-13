@@ -4,9 +4,11 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
-define('UPLOADDIR', ROOT_DIR . '/uploads/images/');
+const UPLOADDIR = ROOT_DIR . '/uploads/images/';
 
 if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
 

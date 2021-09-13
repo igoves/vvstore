@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 $total_pages = $db->super_query("SELECT COUNT(*) as num FROM '" . PREFIX . "_orders' WHERE id=id");
 
@@ -80,7 +82,7 @@ $pagination = navi::show([
 ]);
 
 $tpl->load_template('orders/list.tpl');
-$tpl->set('{val}', $config['val']);
+$tpl->set('{cur}', $config['cur']);
 $tpl->set('{AL}', AL);
 $tpl->set('{list}', $list);
 $tpl->set('{pagination}', $pagination);

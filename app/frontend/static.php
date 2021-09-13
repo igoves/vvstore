@@ -8,11 +8,13 @@ if (!defined('XFOR')) {
     die('Hacking attempt!');
 }
 
-$name = $db->safesql(trim(totranslit($_GET['page'], true, false)));
+$name = $db->safesql(trim(Helper::totranslit($_GET['page'], true, false)));
 
 $row = $db->super_query("SELECT * FROM '" . PREFIX . "_pages' WHERE alt='$name'");
 
-if (!$row['id']) include APP_DIR . '/404.php';
+if (!$row['id']) {
+    include APP_DIR . '/404.php';
+}
 
 $metatags['header_title'] = empty($row['meta_title']) ? $row['name'] : $row['meta_title'];
 $metatags['description'] = $row['meta_desc'];

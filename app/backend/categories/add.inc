@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 if (isset($_POST['add'])) {
 
@@ -13,22 +15,23 @@ if (isset($_POST['add'])) {
     $alt_name = $db->safesql($_POST['alt']);
     isset($_POST['status']) ? $status = 1 : $status = 0;
 
-    if (trim($alt_name) == "" or !$alt_name)
-        $alt_name = totranslit(stripslashes($name), true, false);
-    else
-        $alt_name = totranslit(stripslashes($alt_name), true, false);
+    if (trim($alt_name) == "" or !$alt_name) {
+        $alt_name = Helper::totranslit(stripslashes($name), true, false);
+    } else {
+        $alt_name = Helper::totranslit(stripslashes($alt_name), true, false);
+    }
 
     $a = 0;
-    $sql = $db->query("
-        SELECT * FROM '" . PREFIX . "_categories' WHERE alt = '{$alt_name}'
-    ");
+    $sql = $db->query("SELECT * FROM '" . PREFIX . "_categories' WHERE alt = '{$alt_name}'");
 
     if ($db->num_rows($sql) == 0) {
         $alt = $alt_name;
         $a = 1;
     }
 
-    if ($a != 1) $alt = $alt_name . '_' . random(2);
+    if ($a !== 1) {
+        $alt = $alt_name . '_' . random(2);
+    }
 
     if (!empty($_POST['meta_title']) || !empty($_POST['meta_desc']) || !empty($_POST['meta_key'])) {
         if (!empty($_POST['meta_title'])) {
@@ -43,7 +46,7 @@ if (isset($_POST['add'])) {
             $metatags['keywords'] = $db->safesql($_POST['meta_key']);
         }
     } else {
-        $metatags = create_metatags($name . ' ' . $desc);
+        $metatags = Helper::create_metatags($name . ' ' . $desc);
     }
 
     $parent = (int)$_POST['cat'];
@@ -58,7 +61,7 @@ if (isset($_POST['add'])) {
 
     $db->query("UPDATE '" . PREFIX . "_categories' SET posi=id WHERE id='{$id}'");
 
-    msg("info", $lang['message'], '
+    Helper::msg("info", $lang['message'], '
         ' . $lang['cat_added'] . ' 
             <a class="btn btn-default" href="/' . AL . '/categories/add">
                 <span class="glyphicon glyphicon-plus"></span> 
@@ -79,7 +82,6 @@ if (isset($_POST['add'])) {
 
 }
 
-
 $tpl->load_template('categories/edit.tpl');
 $tpl->set_block("'\\[act_edit\\](.*?)\\[/act_edit\\]'si", "");
 $tpl->set('[act_add]', "");
@@ -92,6 +94,6 @@ $tpl->set("{meta_desc}", '');
 $tpl->set("{meta_key}", '');
 $tpl->set("{status}", 'checked');
 $tpl->set("{AL}", AL);
-$tpl->set("{catlist}", CategorySelection());
+$tpl->set("{catlist}", Helper::CategorySelection());
 $tpl->compile('content');
 $tpl->clear();

@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 
 if (isset($_POST['add'])) {
@@ -15,10 +17,11 @@ if (isset($_POST['add'])) {
     $date = $db->safesql($_POST['date_added']);
     $cost = empty($_POST['cost']) ? 0 : $db->safesql($_POST['cost']);
 
-    if (trim($alt_name) == "" or !$alt_name)
-        $alt_name = totranslit(stripslashes($name), true, false);
-    else
-        $alt_name = totranslit(stripslashes($alt_name), true, false);
+    if (trim($alt_name) == "" or !$alt_name) {
+        $alt_name = Helper::totranslit(stripslashes($name), true, false);
+    } else {
+        $alt_name = Helper::totranslit(stripslashes($alt_name), true, false);
+    }
 
     $cat_id = (int)$_POST['cat'];
     $status = isset($_POST['status']) && $_POST['status'] == 1 ? 1 : 0;
@@ -36,7 +39,7 @@ if (isset($_POST['add'])) {
             $metatags['keywords'] = $db->safesql($_POST['meta_key']);
         }
     } else {
-        $metatags = create_metatags($name . ' ' . $desc);
+        $metatags = Helper::create_metatags($name . ' ' . $desc);
     }
 
 
@@ -78,7 +81,7 @@ if (isset($_POST['add'])) {
 
     $perehod = $status == 1 ? ' ' . $lang['or'] . " <a rel='noajax' class='btn btn-default' target='_blank' href='/" . $id . "-" . $alt_name . "'>" . $lang['open_on_site'] . " <span class='glyphicon glyphicon-share-alt'></span></a>" : "";
 
-    msg('info', $lang['message'], '
+    Helper::msg('info', $lang['message'], '
         ' . $lang['success_added'] . ' 
             <a class="btn btn-default" href="/' . AL . '/products/add">
                 <span class="glyphicon glyphicon-plus"></span> 
@@ -138,7 +141,7 @@ $tpl->set('{img}', $img);
 $tpl->set_block("'\\[act_edit\\](.*?)\\[/act_edit\\]'si", '');
 $tpl->set('[act_add]', '');
 $tpl->set('[/act_add]', '');
-$tpl->set('{catlist}', CategorySelection());
+$tpl->set('{catlist}', Helper::CategorySelection());
 $tpl->set('{date_added}', date('Y-m-d H:i:s'));
 $tpl->set('{AL}', AL);
 $tpl->set('{alt}', '');
@@ -149,6 +152,6 @@ $tpl->set('{desc}', '');
 $tpl->set('{name}', '');
 $tpl->set('{cost}', '');
 $tpl->set('{status}', 'checked');
-$tpl->set('{val}', $config['val']);
+$tpl->set('{cur}', $config['cur']);
 $tpl->compile('content');
 $tpl->clear();

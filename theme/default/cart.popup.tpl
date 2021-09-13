@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-xs-12">
         <div class="alert alert-warning text-center" style="margin-bottom: 0;">
-            Ваша корзина пуста
+            Your cart is empty
         </div>
     </div>
 </div>
@@ -13,7 +13,7 @@
 [not_empty]
 <form id="cart" action="{FL}/cart" method="post">
 
-    <h3 style="margin-top:0;">Корзина</h3>
+    <h3 style="margin-top:0;">Cart</h3>
 
     <div class="table-responsive">
         <table class="table">
@@ -26,15 +26,15 @@
     <div class="row text-center" style="padding:20px 0 10px; border-top: 1px solid #eee;">
         <div class="col-sm-4">
             <button type="button" onclick="cart.exit(event)" class="btn btn-link" style="border:1px dashed #ccc;">
-                Продолжить покупки
+                Continue shopping
             </button>
         </div>
         <div class="col-sm-4" style="line-height:32px;">
-            Итого: <b class="text-danger total_cost">{total_cost}</b> {val}
+            Total: <b class="text-danger total_cost">{total_cost}</b> {cur}
         </div>
         <div class="col-sm-4">
             <a rel="noajax" href="{FL}/checkout" class="btn btn-danger" target="_parent">
-                Оформить заказ
+                Checkout
             </a>
         </div>
 

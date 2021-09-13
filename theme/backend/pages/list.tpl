@@ -1,5 +1,5 @@
 <h3 class="form-group" style="margin-top:0">
-    Страницы
+    Pages
     <a href="/{AL}/pages/add" class="btn btn-default pull-right">
         <span class="glyphicon glyphicon-plus"></span>
     </a>
@@ -11,14 +11,17 @@
         <th>
             <div align="center">ID</div>
         </th>
-        <th>Название</th>
-        <th>Шаблон</th>
-        <th>ЧПУ</th>
-        <th style='width:70px;text-align:center;'>
-            <span title='Перейти' class="tip glyphicon glyphicon-share-alt"></span>
+        <th>Title</th>
+        <th>Template</th>
+        <th>URL</th>
+        <th style='width:50px;text-align:center;'>
+            <span title='Edit' class="tip glyphicon glyphicon-pencil"></span>
         </th>
-        <th style='width:70px;text-align:center;'>
-            <span title='Удалить' class="tip glyphicon glyphicon-remove"></span>
+        <th style='width:50px;text-align:center;'>
+            <span title='Go to' class="tip glyphicon glyphicon-share-alt"></span>
+        </th>
+        <th style='width:50px;text-align:center;'>
+            <span title='Delete' class="tip glyphicon glyphicon-trash"></span>
         </th>
     </tr>
     </thead>

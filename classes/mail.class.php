@@ -4,7 +4,9 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
+}
 
 class mail
 {
@@ -22,7 +24,7 @@ class mail
     {
         $this->from = $config['email'];
         $this->charset = 'utf-8';
-        $this->site_name = $config['domen'];
+        $this->site_name = $config['domain'];
     }
 
     private function compile_headers()

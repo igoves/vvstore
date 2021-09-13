@@ -4,29 +4,21 @@
  vvStore - by xfor.top
 =====================================================
 */
-if (!defined('XFOR')) die('Hacking attempt!');
-
-include FRONT_DIR . '/product.func.php';
-
-function strip_data($text)
-{
-    $quotes = array("\x27", "\x22", "\x60", "\t", "\n", "\r", "'", ",", "/", ";", ":", "@", "[", "]", "{", "}", "=", ")", "(", "*", "&", "^", "%", "$", "<", ">", "?", "!", '"');
-    $goodquotes = array('-', '+', '#');
-    $repquotes = array("\-", "\+", "\#");
-    $text = stripslashes($text);
-    $text = trim(strip_tags($text));
-    $text = str_replace($quotes, '', $text);
-    $text = str_replace($goodquotes, $repquotes, $text);
-    return $text;
+if (!defined('XFOR')) {
+    die('Hacking attempt!');
 }
 
-$story = strip_data($_GET['story']);
+$story = Helper::stripData($_GET['story']);
 $navi = '';
 $cstart = isset($_GET['cstart']) ? (int)$_GET['cstart'] : 0;
-if ($cstart < 0) $cstart = 0;
+if ($cstart < 0) {
+    $cstart = 0;
+}
 $limit = $config['products_number'];
 
-if (empty($story)) include ENGINE_DIR . '/404.php';
+if (empty($story)) {
+    include APP_DIR . '404.php';
+}
 
 if (empty($story) || mb_strlen($story, 'UTF-8') < 3) {
     $title = 'Результаты поиска';
@@ -40,13 +32,9 @@ if (empty($story) || mb_strlen($story, 'UTF-8') < 3) {
 } else {
 
     $count_all = $db->super_query("
-        SELECT
-            COUNT(DISTINCT id) as count
-        FROM
-            '" . PREFIX . "_products'
-        WHERE
-            ( name LIKE '%$story%' OR desc LIKE '%$story%' ) AND 
-            status = 1
+        SELECT COUNT(DISTINCT id) as count
+        FROM '" . PREFIX . "_products'
+        WHERE ( name LIKE '%$story%' OR desc LIKE '%$story%' ) AND status = 1
     ");
     $count_all = $count_all['count'];
 
@@ -66,21 +54,22 @@ if (empty($story) || mb_strlen($story, 'UTF-8') < 3) {
                 ( name LIKE '%$story%' OR desc LIKE '%$story%') AND 
                 status = 1
         ");
-        $txt_goods = pluralForm($count_all, $lang['product1'], $lang['product2'], $lang['product3']);
+        $txt_goods = Helper::pluralForm($count_all, $lang['product1'], $lang['product2'], $lang['product3']);
 
         $title = $lang['for_your_request'] . ' "' . $story . '" ' . $lang['found'] . ' ' . $count_all . ' ' . $txt_goods;
 
         if (isset($_GET['ajax'])) {
-            $tpl->load_template('shop/product.short.list.tpl');
+            $tpl->load_template('product/list.tpl');
         } else {
-            $tpl->load_template('shop/product.short.tile.tpl');
+            $tpl->load_template('product/tile.tpl');
         }
-        $data = getProductShort($config, $db, $tpl, $sql_result);
+        $data = Helper::getProductShort($config, $db, $tpl, $sql_result);
         $content = $data['goods'];
         $i = $data['i'];
 
-        include_once ENGINE_DIR . '/modules/shop/product.list.nav.php';
-        $navi = $tpl->result['navi'];
+//        include_once FRONT_DIR . '/modules/shop/product.list.nav.php';
+//        $navi = $tpl->result['navi'];
+        $navi = '';
     } else {
         $title = $lang['search_result'];
         $content = '
@@ -107,14 +96,13 @@ if (isset($_GET['ajax'])) {
     $tpl->clear();
     echo $tpl->result['content'];
     die();
-} else {
-    $tpl->load_template('search.tpl');
-    $titl_e = $lang['search_by_product'];
-    include_once ENGINE_DIR . '/modules/shop/breadcrumb.php';
-    $tpl->set('{breadcrumb}', $tpl->result['breadcrumb']);
-    $tpl->set('{pagination}', $navi);
 }
 
+$tpl->load_template('search.tpl');
+$titl_e = $lang['search_by_product'];
+include_once FRONT_DIR . 'breadcrumb.php';
+$tpl->set('{breadcrumb}', $tpl->result['breadcrumb']);
+$tpl->set('{pagination}', $navi);
 $tpl->set('{title}', $title);
 $tpl->set('{content}', $content);
 $tpl->compile('content');
