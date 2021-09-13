@@ -33,38 +33,19 @@ function makeDropDown($options, $name, $selected)
 }
 
 
-$main_settings = showRow($lang['name_site'], '
-<div class="col-md-9">
-    <input class="form-control" type=text name="save_con[home_title]" value="' . $config['home_title'] . '" />
-</div>
-');
-
-$main_settings .= showRow($lang['desc_site'], "
-<div class='col-md-9'>
-    <textarea class='form-control' row=2 name='save_con[description]'>{$config['description']}</textarea>
-</div>
-");
-
-$main_settings .= showRow($lang['key_words'], "
-<div class='col-md-9'>
-    <textarea class='form-control' row=2 name='save_con[keywords]'>{$config['keywords']}</textarea>
-</div>
-");
+$tpl->set('{name_site}', $lang['name_site']);
+$tpl->set('{home_title}', $config['home_title']);
+$tpl->set('{desc_site}', $lang['desc_site']);
+$tpl->set('{description}', $config['description']);
+$tpl->set('{key_words}', $lang['key_words']);
+$tpl->set('{keywords}', $config['keywords']);
+$tpl->set('{text_domain}', $lang['domain']);
+$tpl->set('{domain}', $config['domain']);
+$tpl->set('{start_bread}', $lang['start_bread']);
+$tpl->set('{short_title}', $config['short_title']);
 
 
-$main_settings .= showRow($lang['domain'], "
-<div class='col-md-3'>
-    <input class='form-control' type=text name='save_con[domain]' value='{$config['domain']}' />
-</div>
-");
-
-$main_settings .= showRow($lang['start_bread'], "
-<div class='col-md-3'>
-    <input class='form-control' type=text name='save_con[short_title]' value='{$config['short_title']}' />
-</div>
-");
-
-$main_settings .= showRow($lang['curr'], "
+$main_settings = showRow($lang['curr'], "
 <div class='col-md-2'>
     <input class='form-control' type=text name='save_con[val]' value='{$config['cur']}' />
 </div>
