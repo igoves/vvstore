@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        Категории: {category_menu}
+        Categories: {category_menu}
         <h4>{title}</h4>
         <div class="row">
             {goods}

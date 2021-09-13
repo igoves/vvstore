@@ -21,7 +21,7 @@ if (isset($_SESSION['viewed'])) {
         LIMIT {$config['viewed_number']}
     ");
 
-    $tpl->load_template('product/random.tpl');
+    $tpl->load_template('product/tile.tpl');
     $data = Helper::getProductShort($config, $db, $tpl, $sql_result);
     $block_viewed_products = $data['goods'];
     $tpl->clear();
@@ -45,7 +45,7 @@ $block_random_products = '';
 if (!empty($random_products)) {
     $row = unserialize($random_products);
     shuffle($row);
-    $tpl->load_template('product/random.tpl');
+    $tpl->load_template('product/tile.tpl');
     $data = Helper::getProductShort($config, $db, $tpl, $row);
     $block_random_products = $data['goods'];
     unset($data, $tpl->result['goods']);

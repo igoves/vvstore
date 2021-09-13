@@ -1,6 +1,6 @@
 <ul class='breadcrumb'>
     <li>
-        <a href='{FL}/' title='{home_title}'>
+        <a href='/{FL}' title='{home_title}'>
             {short_title}
         </a>
     </li>

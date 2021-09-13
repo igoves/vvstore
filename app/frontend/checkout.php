@@ -27,7 +27,7 @@ if (!isset($_POST['send'])) {
 
         foreach ($cart as $id => $value) {
             $total_cost += $value['cost'] * $cart[$id]['qty'];
-            $tpl->load_template('checkout.cart.tpl');
+            $tpl->load_template('cart.checkout.tpl');
             $tpl->set('{product_id}', $id);
             $tpl->set('{product_alt}', $value['alt']);
             $tpl->set('{product_name}', $value['name']);

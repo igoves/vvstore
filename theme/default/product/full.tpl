@@ -28,7 +28,7 @@
         <hr/>
         <div class="form-group" style="font-size:20px;">Цена: {cost} {cur}</div>
         <button type="button" class="btn btn-lg btn-success btn-block" onclick="cart.add({product-id}, this, event );">
-            Купить
+            Buy
         </button>
     </div>
 </div>

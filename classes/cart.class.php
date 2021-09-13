@@ -169,7 +169,8 @@ class Cart
 
         $total = self::countTotal($cart);
 
-        if (!empty($cart)) {
+        $tpl->load_template('cart.popup.tpl');
+        if (empty($cart)) {
             $tpl->set('[empty]', '');
             $tpl->set('[/empty]', '');
             $tpl->set_block("'\\[not_empty\\](.*?)\\[/not_empty\\]'si", "");
@@ -178,7 +179,6 @@ class Cart
             $tpl->set('[/not_empty]', '');
             $tpl->set_block("'\\[empty\\](.*?)\\[/empty\\]'si", "");
         }
-        $tpl->load_template('cart.popup.tpl');
         $tpl->set('{cart}', $total['cart']);
         $tpl->set('{total_cost}', $total['total_cost']);
         $tpl->set('{cur}', $config['cur']);

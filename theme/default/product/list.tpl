@@ -1,8 +1,7 @@
 <div style="border-bottom:1px solid #ddd; padding:4px;">
-
     <div class="col-xs-4">
         <a href="{FL}/{full_link}">
-            <img class="img-responsive" src="{img}" alt="{title}" title="{title}" />
+            <img class="img-responsive" src="{img}" alt="{title}" title="{title}"/>
         </a>
     </div>
     <div class="col-xs-5">
@@ -16,7 +15,5 @@
             <i class="fa fa-shopping-cart"></i>
         </button>
     </div>
-
     <div class="clearfix"></div>
-
 </div>

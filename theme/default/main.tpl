@@ -35,7 +35,7 @@
                 <li><a href="{FL}/contacts.html">Contacts</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a onclick="cart.show(event);" href="checkout">Cart (<span class="total_qty">{total_qty}</span>)</a>
+                <li><a onclick="cart.show(event);" href="{FL}/checkout">Cart (<span class="total_qty">{total_qty}</span>)</a>
                 </li>
             </ul>
             <div class="navbar-form navbar-right" id="search">
