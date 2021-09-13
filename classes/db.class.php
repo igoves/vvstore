@@ -45,3 +45,8 @@ class Database extends SQLite3
     }
 }
 
+$db = new Database();
+
+if (!$db) {
+    die($db->lastErrorMsg());
+}

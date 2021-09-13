@@ -22,15 +22,12 @@ const ADMIN_THEME = ROOT_DIR . '/theme/backend/';
 const AL = 'cp';     // admin link
 const FL = '';       // frontend link
 
-if (phpversion() < '7') {
+if (PHP_VERSION < '7') {
     die('For the script to work, version php 7 and later is required.');
 }
 
 require_once CLASSES_DIR . 'db.class.php';
-$db = new Database();
-if (!$db) {
-    die($db->lastErrorMsg());
-}
+
 $sql = $db->query("SELECT * FROM '" . PREFIX . "_settings'");
 $config = [];
 while ($row = $db->get_row($sql)) {

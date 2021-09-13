@@ -56,12 +56,12 @@ while ($row = $db->get_row($sql)) {
 }
 
 if (!empty($do)) {
-    $url = ADMIN_DIR . '/' . $mod . '/' . $do . '.inc';
+    $url = BACKEND_DIR . '/' . $mod . '/' . $do . '.inc';
     if ( !@file_exists($url) ) {
         msg('', '', $lang['mod_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '">' . $lang['go_to_list'] . '</a>');
     }
 } else {
-    $url = ADMIN_DIR . '/' . $mod . '/list.inc';
+    $url = BACKEND_DIR . '/' . $mod . '/list.inc';
     if ( !@file_exists($url) ) {
         msg('', '', $lang['mod_not_exist'] . ' <a class="btn btn-default" href="/' . AL . '">' . $lang['go_to_list'] . '</a>');
     }
