@@ -34,7 +34,7 @@ class sitemap
 
     public function __construct($config)
     {
-        $this->home = $config['domen'];
+        $this->home = $config['domain'];
     }
 
     function build_map()

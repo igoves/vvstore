@@ -16,7 +16,7 @@ if ($cstart) {
 }
 $i = $cstart;
 
-$tpl->load_template('product.short.tile.tpl');
+$tpl->load_template('product/tile.tpl');
 
 if (!isset($category_id)) {
     include APP_DIR . '/404.php';
@@ -80,7 +80,7 @@ $pagination = navi::show([
     'template' => 'nav.tpl',
 ]);
 
-$tpl->load_template('product.catalog.tpl');
+$tpl->load_template('product/catalog.tpl');
 $tpl->set('{title}', $cat_title);
 $tpl->set('{desc}', $cat_desc);
 $tpl->set('{goods}', $tpl->result['goods']);

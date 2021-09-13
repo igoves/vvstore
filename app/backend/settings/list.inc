@@ -52,9 +52,9 @@ $main_settings .= showRow($lang['key_words'], "
 ");
 
 
-$main_settings .= showRow($lang['domen'], "
+$main_settings .= showRow($lang['domain'], "
 <div class='col-md-3'>
-    <input class='form-control' type=text name='save_con[domen]' value='{$config['domen']}' />
+    <input class='form-control' type=text name='save_con[domain]' value='{$config['domain']}' />
 </div>
 ");
 
@@ -66,7 +66,7 @@ $main_settings .= showRow($lang['start_bread'], "
 
 $main_settings .= showRow($lang['curr'], "
 <div class='col-md-2'>
-    <input class='form-control' type=text name='save_con[val]' value='{$config['val']}' />
+    <input class='form-control' type=text name='save_con[val]' value='{$config['cur']}' />
 </div>
 <div class='col-md-2'>
     <input class='form-control' type=text name='save_con[ratio]' value='{$config['ratio']}' />

@@ -16,7 +16,7 @@
 				Всего к оплате:
 			</td>
 			<td style="border-top: 1px solid #cccccc; text-align:right;">
-				{total_cost} {val}
+				{total_cost} {cur}
 			</td>
 		</tr>
 		{noty}

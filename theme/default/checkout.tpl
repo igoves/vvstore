@@ -86,7 +86,7 @@
                             <h4>
                                 Итого:
                                 <strong style="margin-left: 20px;" class="text-danger">
-                                    <span class="total_cost">{total_cost}</span> {val}
+                                    <span class="total_cost">{total_cost}</span> {cur}
                                 </strong>
                             </h4>
                         </td>

@@ -142,6 +142,6 @@ $tpl->set('{meta_title}', $row['meta_title']);
 $tpl->set('{meta_desc}', $row['meta_desc']);
 $tpl->set('{meta_key}', $row['meta_key']);
 $tpl->set('{cost}', $row['cost']);
-$tpl->set('{val}', $config['val']);
+$tpl->set('{cur}', $config['cur']);
 $tpl->compile('content');
 $tpl->clear();

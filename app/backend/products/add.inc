@@ -152,6 +152,6 @@ $tpl->set('{desc}', '');
 $tpl->set('{name}', '');
 $tpl->set('{cost}', '');
 $tpl->set('{status}', 'checked');
-$tpl->set('{val}', $config['val']);
+$tpl->set('{cur}', $config['cur']);
 $tpl->compile('content');
 $tpl->clear();

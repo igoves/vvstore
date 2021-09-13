@@ -150,7 +150,7 @@ class Cart
         $tpl->set('{product_alt}', $value['alt']);
         $tpl->set('{product_name}', $value['name']);
         $tpl->set('{cost}', $value['cost']);
-        $tpl->set('{val}', $config['val']);
+        $tpl->set('{cur}', $config['cur']);
         $tpl->set('{product_img}', $value['img']);
         $tpl->set('{qty}', $value['qty']);
         $tpl->set('{price}', $value['cost'] * $value['qty']);
@@ -181,7 +181,7 @@ class Cart
         $tpl->load_template('cart.popup.tpl');
         $tpl->set('{cart}', $total['cart']);
         $tpl->set('{total_cost}', $total['total_cost']);
-        $tpl->set('{val}', $config['val']);
+        $tpl->set('{cur}', $config['cur']);
         $tpl->set('{FL}', FL);
         $tpl->compile('cart_popup');
         $tpl->clear();

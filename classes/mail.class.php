@@ -24,7 +24,7 @@ class mail
     {
         $this->from = $config['email'];
         $this->charset = 'utf-8';
-        $this->site_name = $config['domen'];
+        $this->site_name = $config['domain'];
     }
 
     private function compile_headers()

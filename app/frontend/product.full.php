@@ -9,23 +9,21 @@ if (!defined('XFOR')) {
 }
 
 $row = $db->super_query("
-    SELECT * FROM
-        '" . PREFIX . "_products'
-    WHERE
-        id = $productid
+    SELECT * FROM '" . PREFIX . "_products'
+    WHERE id = $productid
 ");
 
 if (!$row['id']) {
-    include APP_DIR . '/404.php';
+    include APP_DIR . '404.php';
 }
-if ($_GET['seourl'] != $row['alt']) {
-    include APP_DIR . '/404.php';
+if ($_GET['seourl'] !== $row['alt']) {
+    include APP_DIR . '404.php';
 }
 
 $title = stripslashes($row['name']);
 $cost = $row['cost'] * $config['ratio'];
 
-if ($row['cat_id'] == 0) {
+if ((int)$row['cat_id'] === 0) {
     $my_cat_link = 'Без категории';
 } else {
     $row['cat_id'] = (int)$row['cat_id'];
@@ -89,11 +87,11 @@ $titl_e = $title;
 $category_id = $row['cat_id'];
 include_once FRONT_DIR . '/breadcrumb.php';
 
-$tpl->load_template('product.full.tpl');
+$tpl->load_template('product/full.tpl');
 $tpl->set('{product-id}', $row['id']);
 $tpl->set('{title}', $title);
 $tpl->set('{desc}', stripslashes($row['desc']));
-$tpl->set('{val}', $config['val']);
+$tpl->set('{cur}', $config['cur']);
 $tpl->set('{cost}', $cost);
 $tpl->set('{FL}', FL);
 $tpl->set('{breadcrumb}', $tpl->result['breadcrumb']);

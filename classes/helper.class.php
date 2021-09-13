@@ -235,7 +235,7 @@ class Helper
         $tpl->set('{full_link}', $row['id'] . '-' . $row['alt']);
         $tpl->set('{img}', $img);
         $tpl->set('{cost}', $row['cost'] * $config['ratio']);
-        $tpl->set('{val}', $config['val']);
+        $tpl->set('{cur}', $config['cur']);
         $tpl->set('{product-id}', $row['id']);
         $tpl->set('{FL}', FL);
         $tpl->compile('goods');
@@ -329,7 +329,7 @@ class Helper
             $URI = str_replace('//', '/', $_SERVER['REQUEST_URI']);
             $protocol = Helper::getProtocol();
             header('HTTP/1.1 301 Moved Permanently');
-            header('Location: ' . $protocol . $config['domen'] . $URI);
+            header('Location: ' . $protocol . $config['domain'] . $URI);
             die();
         }
     }

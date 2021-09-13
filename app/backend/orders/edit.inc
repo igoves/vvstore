@@ -75,6 +75,6 @@ $tpl->set('{delivery}', stripslashes($row['delivery'] . ' ' . $row['otd']));
 $tpl->set('{payment}', stripslashes($row['payment']));
 $tpl->set('{city}', stripslashes($row['city']));
 $tpl->set('{id}', $row['id']);
-$tpl->set('{val}', $config['val']);
+$tpl->set('{cur}', $config['cur']);
 $tpl->compile('content');
 $tpl->clear();

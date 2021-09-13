@@ -40,8 +40,8 @@ if (!empty($_SESSION['cart'])) {
 $tpl->set('{total_qty}', $total_qty);
 $tpl->set('{total_cost}', $total_cost);
 $tpl->set('{Y}', date('Y'));
-$tpl->set('{val}', $config['val']);
-$tpl->set('{domen}', $config['domen']);
+$tpl->set('{cur}', $config['cur']);
+$tpl->set('{domain}', $config['domain']);
 $tpl->set('{FL}', FL);
 if (!empty($config['tel'])) {
     $tel_array = explode(',', $config['tel']);

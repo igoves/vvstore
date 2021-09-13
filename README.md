@@ -62,10 +62,10 @@ The site map is generated automatically and is available at **yoursite.com/sitem
 * {headers} - output of meta tags and page title
 * {total_qty} - number of items in the cart
 * {total_cost} - price of goods in the basket
-* {val} - currency prefix
+* {cur} - currency prefix
 * {address} - address from settings
 * {content} - page content output
-* {domen} - site domain
+* {domain} - site domain
 * {Y} - this year
 
 **404.tpl** - 404 page template, no embedded tags
@@ -102,14 +102,14 @@ The site map is generated automatically and is available at **yoursite.com/sitem
 * {title} - product name
 * {product-id} - product id
 * {cost} - cost
-* {val} - currency
+* {cur} - currency
 
 **cart.popup.tpl** - popup cart pattern
 * [empty][/empty] - show block if cart is empty
 * [not_empty][/not_empty] - show block if cart is not empty
 * {cart} - list of products in cart
 * {total_cost} - total cost
-* {val} - currency
+* {cur} - currency
 
 **checkout.tpl** - checkout page template
 * [empty][/empty] - show block if cart is empty
@@ -118,7 +118,7 @@ The site map is generated automatically and is available at **yoursite.com/sitem
 * {payment_method} - payment methods
 * {cart} - list of products in cart
 * {total_cost} - total cost
-* {val} - currency
+* {cur} - currency
 
 **checkout.cart.tpl** - cart template for checkout page
 * {product_id} - product id
@@ -126,7 +126,7 @@ The site map is generated automatically and is available at **yoursite.com/sitem
 * {product_img} - path to image pictures
 * {product_name} - product name
 * {cost} - cost
-* {val} - currency
+* {cur} - currency
 * {qty} - quantity
 * {price} - sum price
 
@@ -150,7 +150,7 @@ The site map is generated automatically and is available at **yoursite.com/sitem
 * {link-category} - category
 * {fulldesc} - description
 * {cost} - cost
-* {val} - currency
+* {cur} - currency
 * {product-id} - product id
 
 **product.short.list.tpl** - short template for products drop out of search
@@ -159,7 +159,7 @@ The site map is generated automatically and is available at **yoursite.com/sitem
 * {title} - product name
 * {product-id} - product id
 * {cost} - cost
-* {val} - currency
+* {cur} - currency
 
 **product.short.tile.tpl** - small item card template
 * {full_link} - product slug
@@ -167,21 +167,21 @@ The site map is generated automatically and is available at **yoursite.com/sitem
 * {title} - product name
 * {product-id} - product id
 * {cost} - cost
-* {val} - currency
+* {cur} - currency
 
 **mails/mail.tpl** - letter template
-* {domen} - site domain
+* {domain} - site domain
 * {mail_content} - letter content
 * {email} - site e-mail
 
 **mails/order_table.tpl** - order table template
 * {list} - list of products
 * {total_cost} - total cost
-* {val} - currency 
+* {cur} - currency 
 * {noty} - if there is an order comment
  
 **mails/txt_order_success_client.tpl** - text of the order letter to the buyer
-* {domen} - site domain
+* {domain} - site domain
 * {fio} - name of the buyer
 * {tel} - buyer's phone
 * [tel][/tel] - show this block if there is a phone
@@ -199,7 +199,7 @@ The site map is generated automatically and is available at **yoursite.com/sitem
 * {order_table} - ordered basket block
 
 **mails/txt_order_success_manager.tpl** - text of the order letter to manager
-* {domen} - site domain
+* {domain} - site domain
 * {fio} - name of the buyer
 * {tel} - buyer's phone
 * [tel][/tel] - show this block if there is a phone

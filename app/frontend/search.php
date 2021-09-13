@@ -17,7 +17,7 @@ if ($cstart < 0) {
 $limit = $config['products_number'];
 
 if (empty($story)) {
-    include APP_DIR . '/404.php';
+    include APP_DIR . '404.php';
 }
 
 if (empty($story) || mb_strlen($story, 'UTF-8') < 3) {
@@ -32,13 +32,9 @@ if (empty($story) || mb_strlen($story, 'UTF-8') < 3) {
 } else {
 
     $count_all = $db->super_query("
-        SELECT
-            COUNT(DISTINCT id) as count
-        FROM
-            '" . PREFIX . "_products'
-        WHERE
-            ( name LIKE '%$story%' OR desc LIKE '%$story%' ) AND 
-            status = 1
+        SELECT COUNT(DISTINCT id) as count
+        FROM '" . PREFIX . "_products'
+        WHERE ( name LIKE '%$story%' OR desc LIKE '%$story%' ) AND status = 1
     ");
     $count_all = $count_all['count'];
 
@@ -63,15 +59,15 @@ if (empty($story) || mb_strlen($story, 'UTF-8') < 3) {
         $title = $lang['for_your_request'] . ' "' . $story . '" ' . $lang['found'] . ' ' . $count_all . ' ' . $txt_goods;
 
         if (isset($_GET['ajax'])) {
-            $tpl->load_template('shop/product.short.list.tpl');
+            $tpl->load_template('product/list.tpl');
         } else {
-            $tpl->load_template('shop/product.short.tile.tpl');
+            $tpl->load_template('product/tile.tpl');
         }
         $data = Helper::getProductShort($config, $db, $tpl, $sql_result);
         $content = $data['goods'];
         $i = $data['i'];
 
-        include_once APP_DIR . '/modules/shop/product.list.nav.php';
+//        include_once FRONT_DIR . '/modules/shop/product.list.nav.php';
         $navi = $tpl->result['navi'];
     } else {
         $title = $lang['search_result'];
@@ -99,14 +95,13 @@ if (isset($_GET['ajax'])) {
     $tpl->clear();
     echo $tpl->result['content'];
     die();
-} else {
-    $tpl->load_template('search.tpl');
-    $titl_e = $lang['search_by_product'];
-    include_once FRONT_DIR . '/breadcrumb.php';
-    $tpl->set('{breadcrumb}', $tpl->result['breadcrumb']);
-    $tpl->set('{pagination}', $navi);
 }
 
+$tpl->load_template('search.tpl');
+$titl_e = $lang['search_by_product'];
+include_once FRONT_DIR . 'breadcrumb.php';
+$tpl->set('{breadcrumb}', $tpl->result['breadcrumb']);
+$tpl->set('{pagination}', $navi);
 $tpl->set('{title}', $title);
 $tpl->set('{content}', $content);
 $tpl->compile('content');

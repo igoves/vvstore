@@ -16,9 +16,9 @@ if (isset($_POST['add'])) {
     isset($_POST['status']) ? $status = 1 : $status = 0;
 
     if (trim($alt_name) == "" or !$alt_name) {
-        $alt_name = totranslit(stripslashes($name), true, false);
+        $alt_name = Helper::totranslit(stripslashes($name), true, false);
     } else {
-        $alt_name = totranslit(stripslashes($alt_name), true, false);
+        $alt_name = Helper::totranslit(stripslashes($alt_name), true, false);
     }
 
     $a = 0;

@@ -72,7 +72,7 @@
             <input type="text" name="date_added" class="form-control datepicker text-center" value="{date_added}" />
         </div>
         <div class="col-md-2">
-            <input type="text" class="form-control" name="cost" value="{cost}" placeholder="Цена, {val}" />
+            <input type="text" class="form-control" name="cost" value="{cost}" placeholder="Цена, {cur}" />
         </div>
     </div>
 

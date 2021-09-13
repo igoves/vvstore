@@ -88,7 +88,7 @@ $pagination = navi::show([
 ]);
 
 $tpl->load_template('products/list.tpl');
-$tpl->set('{val}', $config['val']);
+$tpl->set('{cur}', $config['cur']);
 $tpl->set('{AL}', AL);
 $tpl->set('{list}', $list);
 $tpl->set('{pagination}', $pagination);

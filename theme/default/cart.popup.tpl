@@ -30,7 +30,7 @@
             </button>
         </div>
         <div class="col-sm-4" style="line-height:32px;">
-            Итого: <b class="text-danger total_cost">{total_cost}</b> {val}
+            Итого: <b class="text-danger total_cost">{total_cost}</b> {cur}
         </div>
         <div class="col-sm-4">
             <a rel="noajax" href="{FL}/checkout" class="btn btn-danger" target="_parent">

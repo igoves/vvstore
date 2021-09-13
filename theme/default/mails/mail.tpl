@@ -10,7 +10,7 @@
         <td style="background: #84c4fb; padding: 3px; color: #000000;">
             <table cellspacing="0" border="0" width="100%" style="background: transparent; color: #000000;">
               <tbody><tr>
-				<td bgcolor="#FFFFFF" style="padding-left: 30px; padding-top: 8px;"><span style="font: 40px Arial,Tahoma;">{domen}</span></td>
+				<td bgcolor="#FFFFFF" style="padding-left: 30px; padding-top: 8px;"><span style="font: 40px Arial,Tahoma;">{domain}</span></td>
               </tr>
               <tr>
                 <td height="3" bgcolor="#84c4fb"></td>
@@ -24,7 +24,7 @@
                     <br />
                     <br />
                     C Уважением,<br />
-                    Администрация {domen}
+                    Администрация {domain}
                 </td>
               </tr>
               <tr>

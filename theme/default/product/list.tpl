@@ -9,7 +9,7 @@
         <h6>
             <a href="{FL}/{full_link}" title="{title}">{title}</a>
         </h6>
-        {cost} {val}
+        {cost} {cur}
     </div>
     <div class="col-xs-3">
         <button type="button" onclick="cart.add({product-id}, this, event );" class="btn btn-success btn-sm pull-right">

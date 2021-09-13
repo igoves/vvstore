@@ -10,7 +10,7 @@
     <tr>
         <th>Название</th>
         <th style='width:90px'>
-            <div align=center>Цена, {val}</div>
+            <div align=center>Цена, {cur}</div>
         </th>
         <th style='width:105px'>
                 <span style=" width:37px; display:block; float:left; text-align:right;" class="tip"

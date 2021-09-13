@@ -90,7 +90,7 @@
             </div>
         </div>
         <hr/>
-        <p class="text-center text-muted">{domen} &COPY; {Y}</p>
+        <p class="text-center text-muted">{domain} &COPY; {Y}</p>
     </div>
 </footer>
 
