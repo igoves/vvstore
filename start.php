@@ -50,7 +50,6 @@ date_default_timezone_set($config['timezone']);
 
 require_once CLASSES_DIR . 'templates.class.php';
 require_once CLASSES_DIR . 'helper.class.php';
-//require_once APP_DIR . '/helper.php';
 $lang = parse_ini_file(LANG_DIR . $config['lang'] . '.ini', true);
 
 Helper::checkDoubleSlash();
